@@ -9,30 +9,30 @@ To create a world sign which is teleporting the player to a specific world when 
 
 ![](http://i.imgur.com/UbEQBJE.png)
 
-So write the sign like that:
-1. world
-2. the name of the world
-3. anything like a description of the world
-4. nothing
+So write the sign like that:  
+1. world  
+2. the name of the world  
+3. anything like a description of the world  
+4. nothing  
 
 ### Command
 To create a command sign which is executing a specific command when he is touching it, just create a sign like this and touch it.
 
 ![](http://i.imgur.com/1EqidAN.png)
 
-Write the sign like that:
-1. command
-2. anything like a description of the command
-3. the first part of the command
-4. the second part of the command
+Write the sign like that:  
+1. command  
+2. anything like a description of the command  
+3. the first part of the command  
+4. the second part of the command  
 
-So when you are writing your sign like this, it'll execute the command "help".
-3. help
-4. nothing
+So when you are writing your sign like this, it'll execute the command "help".  
+3. help  
+4. nothing  
 
-And when you're writing your sign like that, it'll also execute the command "help".
-3. he
-4. lp
+And when you're writing your sign like that, it'll also execute the command "help".  
+3. he  
+4. lp  
 
 ## Config
 
