@@ -1,0 +1,9 @@
+name: AllSigns
+main: jjplaying\AllSigns\AllSigns
+version: 1.0.0
+api: 1.4.1
+commands:
+  allsigns:
+    description: "AllSigns"
+    usage: "/allsigns"
+    aliases: ["as"]
