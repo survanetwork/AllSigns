@@ -1,5 +1,5 @@
 # AllSigns
-Turn signs into world teleport and command signs - plugin for PocketMine / ImagicalMine
+Turn signs into world teleport and command signs - plugin for PocketMine
 
 ## Creating signs
 You can create world signs to teleport the player to a world or command signs which are running a specific command when the player is touching it.
