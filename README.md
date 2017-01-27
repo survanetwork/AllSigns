@@ -1,9 +1,9 @@
 # AllSigns
 Turn signs into world teleport and command signs - plugin for PocketMine
 
-![](https://circleci.com/gh/jjplaying/AllSigns.png?style=shield)
+![](https://circleci.com/gh/pmmpplugins/AllSigns.png?style=shield)
 
-[Get the latest AllSigns artifacts here](https://buildtest.ml/jjplaying/AllSigns)
+[Get the latest AllSigns artifacts here](https://buildtest.yellowlake.net/pmmpplugins/AllSigns)
 
 ## Creating signs
 You can create world signs to teleport the player to a world or command signs which are running a specific command when the player is touching it.
@@ -58,4 +58,4 @@ error: "§cError" # Text which is shown on the sign at the players count when th
 [![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
 
 You are free to copy, redistribute, change or expand our work, but you must give credits share it under the same license.
-AllSigns by [jjplaying](https://github.com/jjplaying/AllSigns) is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+AllSigns by [pmmpplugins](https://github.com/pmmpplugins/AllSigns) is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
