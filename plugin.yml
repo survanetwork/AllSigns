@@ -1,7 +1,7 @@
 name: AllSigns
-main: jjplaying\AllSigns\AllSigns
+main: surva\AllSigns\AllSigns
 version: 1.0.0
-api: 1.4.1
+api: 2.0.0
 commands:
   allsigns:
     description: "AllSigns"

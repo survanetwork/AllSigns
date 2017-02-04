@@ -6,7 +6,7 @@ machine:
 
 checkout:
   post:
-  - git clone https://github.com/jjplaying/AllSigns
+  - git clone https://github.com/survanetwork/AllSigns
 
 dependencies:
   override:
