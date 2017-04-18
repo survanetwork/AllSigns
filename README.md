@@ -1,9 +1,9 @@
 # AllSigns
 Turn signs into world teleport and command signs - plugin for PocketMine
 
-![](https://circleci.com/gh/survanetwork/AllSigns.png?style=shield)
+![](https://poggit.pmmp.io/ci.badge/survanetwork/AllSigns/AllSigns)
 
-[Get the latest AllSigns artifacts here](https://buildtest.yellowlake.net/survanetwork/AllSigns)
+[Get the latest AllSigns artifacts (PHAR file) here](https://poggit.pmmp.io/ci/survanetwork/AllSigns/AllSigns)
 
 ## Creating signs
 You can create world signs to teleport the player to a world or command signs which are running a specific command when the player is touching it.
