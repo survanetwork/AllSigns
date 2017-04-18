@@ -14,6 +14,7 @@ use pocketmine\scheduler\PluginTask;
 use pocketmine\tile\Sign;
 
 class SignUpdate extends PluginTask {
+    /* @var AllSigns */
     private $allSigns;
 
     public function __construct(AllSigns $allSigns) {

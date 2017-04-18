@@ -15,6 +15,7 @@ use pocketmine\level\Level;
 use pocketmine\tile\Sign;
 
 class EventListener implements Listener {
+    /* @var AllSigns */
     private $allSigns;
 
     public function __construct(AllSigns $allSigns) {
