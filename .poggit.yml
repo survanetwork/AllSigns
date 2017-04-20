@@ -4,3 +4,4 @@ branches:
 projects:
   AllSigns:
     path: ""
+    icon: "icon.png"
