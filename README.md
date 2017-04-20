@@ -1,5 +1,5 @@
 # AllSigns
-Turn signs into world teleport and command signs - plugin for PocketMine
+Turn signs into world teleport and command signs
 
 ![](https://poggit.pmmp.io/ci.badge/survanetwork/AllSigns/AllSigns)
 
