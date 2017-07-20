@@ -20,14 +20,4 @@ class AllSigns extends PluginBase {
 
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new SignUpdate($this), 60);
     }
-
-    public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
-        switch(strtolower($command->getName())) {
-            case "allsigns":
-                $sender->sendMessage("§7This server is using §eAllSigns §7by §bsurva network §7(https://github.com/survanetwork)");
-                return true;
-        }
-
-        return false;
-    }
 }
