@@ -6,7 +6,7 @@
  * Time: 12:01
  */
 
-namespace surva\AllSigns;
+namespace surva\allsigns;
 
 use pocketmine\block\Block;
 use pocketmine\event\Listener;
@@ -22,6 +22,9 @@ class EventListener implements Listener {
         $this->allSigns = $allSigns;
     }
 
+    /**
+     * @param PlayerInteractEvent $event
+     */
     public function onPlayerInteract(PlayerInteractEvent $event) {
         $player = $event->getPlayer();
         $block = $event->getBlock();

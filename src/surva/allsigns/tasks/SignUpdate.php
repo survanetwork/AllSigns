@@ -6,9 +6,9 @@
  * Time: 12:23
  */
 
-namespace surva\AllSigns\Tasks;
+namespace surva\allsigns\tasks;
 
-use surva\AllSigns\AllSigns;
+use surva\allsigns\AllSigns;
 use pocketmine\level\Level;
 use pocketmine\scheduler\PluginTask;
 use pocketmine\tile\Sign;
@@ -23,7 +23,7 @@ class SignUpdate extends PluginTask {
         parent::__construct($allSigns);
     }
 
-    public function onRun($currentTick) {
+    public function onRun(int $currentTick) {
         foreach($this->getAllSigns()->getServer()->getLevels() as $level) {
             foreach($level->getTiles() as $tile) {
                 if($tile instanceof Sign) {
