@@ -26,9 +26,16 @@ class EventListener implements Listener {
      */
     public function onPlayerInteract(PlayerInteractEvent $event) {
         $player = $event->getPlayer();
+        $action = $event->getAction();
         $block = $event->getBlock();
 
-        if($block->getId() == Block::SIGN_POST OR $block->getId() == Block::WALL_SIGN) {
+        if(
+            (
+                $block->getId() == Block::SIGN_POST OR
+                $block->getId() == Block::WALL_SIGN
+            ) AND
+            $action == PlayerInteractEvent::RIGHT_CLICK_BLOCK
+        ) {
             $tile = $block->getLevel()->getTile($block);
 
             if($tile instanceof Sign) {
