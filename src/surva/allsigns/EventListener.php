@@ -11,7 +11,6 @@ namespace surva\allsigns;
 use pocketmine\block\Block;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\level\Level;
 use pocketmine\tile\Sign;
 
 class EventListener implements Listener {
@@ -37,10 +36,12 @@ class EventListener implements Listener {
 
                 switch($text[0]) {
                     case $this->getAllSigns()->getConfig()->get("world"):
-                        $level = $this->getAllSigns()->getServer()->getLevelByName($text[1]);
-
-                        if($level instanceof Level) {
-                            $tile->setText($this->getAllSigns()->getConfig()->get("worldtext"), $text[1], $text[2], count($level->getPlayers()) . " " . $this->getAllSigns()->getConfig()->get("players"));
+                        if($this->getAllSigns()->getServer()->isLevelGenerated($text[1])) {
+                            if($level = $this->getAllSigns()->getServer()->getLevelByName($text[1])) {
+                                $tile->setText($this->getAllSigns()->getConfig()->get("worldtext"), $text[1], $text[2], count($level->getPlayers()) . " " . $this->getAllSigns()->getConfig()->get("players"));
+                            } else {
+                                $tile->setText($this->getAllSigns()->getConfig()->get("worldtext"), $text[1], $text[2], "0 " . $this->getAllSigns()->getConfig()->get("players"));
+                            }
                         } else {
                             $block->getLevel()->setBlock($block, Block::get(Block::AIR));
 
@@ -51,9 +52,9 @@ class EventListener implements Listener {
                         $tile->setText($this->getAllSigns()->getConfig()->get("commandtext"), $text[1], $text[2], $text[3]);
                         break;
                     case $this->getAllSigns()->getConfig()->get("worldtext"):
-                        $level = $this->getAllSigns()->getServer()->getLevelByName($text[1]);
+                        $this->getAllSigns()->getServer()->loadLevel($text[1]);
 
-                        if($level instanceof Level) {
+                        if($level = $this->getAllSigns()->getServer()->getLevelByName($text[1])) {
                             $player->teleport($level->getSafeSpawn());
                         } else {
                             $player->sendMessage($this->getAllSigns()->getConfig()->get("noworld"));

@@ -9,7 +9,6 @@
 namespace surva\allsigns\tasks;
 
 use surva\allsigns\AllSigns;
-use pocketmine\level\Level;
 use pocketmine\scheduler\PluginTask;
 use pocketmine\tile\Sign;
 
@@ -30,10 +29,12 @@ class SignUpdate extends PluginTask {
                     $text = $tile->getText();
 
                     if($text[0] == $this->getAllSigns()->getConfig()->get("worldtext")) {
-                        $level = $this->getAllSigns()->getServer()->getLevelByName($text[1]);
-
-                        if($level instanceof Level) {
-                            $tile->setText($text[0], $text[1], $text[2], count($level->getPlayers()) . " " . $this->getAllSigns()->getConfig()->get("players"));
+                        if($this->getAllSigns()->getServer()->isLevelGenerated($text[1])) {
+                            if($level = $this->getAllSigns()->getServer()->getLevelByName($text[1])) {
+                                $tile->setText($text[0], $text[1], $text[2], count($level->getPlayers()) . " " . $this->getAllSigns()->getConfig()->get("players"));
+                            } else {
+                                $tile->setText($text[0], $text[1], $text[2], "0 " . $this->getAllSigns()->getConfig()->get("players"));
+                            }
                         } else {
                             $tile->setText($text[0], $text[1], $text[2], $this->getAllSigns()->getConfig()->get("error"));
                         }
