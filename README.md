@@ -1,40 +1,40 @@
 # AllSigns
-Turn signs into world teleport and command signs
+Turn signs into world teleport and command signs.
 
 ![](https://poggit.pmmp.io/ci.badge/survanetwork/AllSigns/AllSigns)
 
 [Get the latest AllSigns artifacts (PHAR file) here](https://poggit.pmmp.io/ci/survanetwork/AllSigns/AllSigns)
 
 ## Creating signs
-You can create world signs to teleport the player to a world or command signs which are running a specific command when the player is touching it.
+You can create world signs to teleport the player to a world or command signs which are running a specific command when the player touches it.
 
 ### World
-To create a world sign which is teleporting the player to a specific world when he is touching it and is showing the players count in the world, just create a sign like this and touch it.
+To create a world sign which teleports the player to a specific world when he/she is touching it and is showing how many players are in that world, just create a sign like this and touch it.
 
 ![](http://i.imgur.com/UbEQBJE.png)
 
-So write the sign like that:  
-1. world  
-2. the name of the world  
-3. anything like a description of the world  
-4. nothing  
+So write the sign like this:
+1. world
+2. The name of the world (e.g. lobby)
+3. Description of the world.  
+4. Nothing (Leave blank)
 
 ### Command
-To create a command sign which is executing a specific command when he is touching it, just create a sign like this and touch it.
+To create a command sign which is executes a specific command when he/she touches it, just create a sign like this and touch it.
 
 ![](http://i.imgur.com/1EqidAN.png)
 
-Write the sign like that:  
-1. command  
-2. anything like a description of the command  
-3. the first part of the command  
-4. the second part of the command  
+Write the sign like this:
+1. command
+2. Description of the world.  
+3. First part of the command
+4. Second part of the command  
 
-So when you are writing your sign like this, it'll execute the command "help".  
-3. help  
-4. nothing  
+If the sign looks like this, it'll execute the command "help".  
+3. help 
+4. Nothing (Leave blank)
 
-And when you're writing your sign like that, it'll also execute the command "help".  
+If the sign looks like this, it'll also execute the command "help".  
 3. he  
 4. lp  
 
