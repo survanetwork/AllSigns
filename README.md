@@ -38,22 +38,6 @@ And when you're writing your sign like that, it'll also execute the command "hel
 3. he  
 4. lp  
 
-## Config
-
-```yaml
-# Sign commands and text
-world: "world" # When you create a world teleport sign, you need to write that in the first line
-worldtext: "§9World" # This will be written in the first line when you created the sign
-players: "players" # This is showing the players count of the world, like 7 players
-
-command: "command" # When you create a command sign, you need to write that in the first line
-commandtext: "§aCommand" # This will be written in the first line when you created the sign
-
-# Messages
-noworld: "§cWorld does not exist" # Message which is sent to the player when a world does not exist
-error: "§cError" # Text which is shown on the sign at the players count when the world does not exist
-```
-
 ## License & Credits
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 

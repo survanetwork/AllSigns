@@ -41,33 +41,39 @@ class EventListener implements Listener {
             if($tile instanceof Sign) {
                 $text = $tile->getText();
 
+                $worldIdentifier = $this->getAllSigns()->getConfig()->getNested("world.identifier");
+                $worldText = $this->getAllSigns()->getConfig()->getNested("world.text");
+
+                $commandIdentifier = $this->getAllSigns()->getConfig()->getNested("command.identifier");
+                $commandText = $this->getAllSigns()->getConfig()->getNested("command.text");
+
                 switch($text[0]) {
-                    case $this->getAllSigns()->getConfig()->get("world"):
+                    case $worldIdentifier:
                         if($this->getAllSigns()->getServer()->isLevelGenerated($text[1])) {
                             if($level = $this->getAllSigns()->getServer()->getLevelByName($text[1])) {
-                                $tile->setText($this->getAllSigns()->getConfig()->get("worldtext"), $text[1], $text[2], count($level->getPlayers()) . " " . $this->getAllSigns()->getConfig()->get("players"));
+                                $tile->setText($worldText, $text[1], $text[2], $this->getAllSigns()->getMessage("players", array("count" => count($level->getPlayers()))));
                             } else {
-                                $tile->setText($this->getAllSigns()->getConfig()->get("worldtext"), $text[1], $text[2], "0 " . $this->getAllSigns()->getConfig()->get("players"));
+                                $tile->setText($worldText, $text[1], $text[2], $this->getAllSigns()->getMessage("players", array("count" => 0)));
                             }
                         } else {
                             $block->getLevel()->setBlock($block, Block::get(Block::AIR));
 
-                            $player->sendMessage($this->getAllSigns()->getConfig()->get("noworld"));
+                            $player->sendMessage($this->getAllSigns()->getMessage("noworld"));
                         }
                         break;
-                    case $this->getAllSigns()->getConfig()->get("command"):
-                        $tile->setText($this->getAllSigns()->getConfig()->get("commandtext"), $text[1], $text[2], $text[3]);
+                    case $commandIdentifier:
+                        $tile->setText($commandText, $text[1], $text[2], $text[3]);
                         break;
-                    case $this->getAllSigns()->getConfig()->get("worldtext"):
+                    case $worldText:
                         $this->getAllSigns()->getServer()->loadLevel($text[1]);
 
                         if($level = $this->getAllSigns()->getServer()->getLevelByName($text[1])) {
                             $player->teleport($level->getSafeSpawn());
                         } else {
-                            $player->sendMessage($this->getAllSigns()->getConfig()->get("noworld"));
+                            $player->sendMessage($this->getAllSigns()->getMessage("noworld"));
                         }
                         break;
-                    case $this->getAllSigns()->getConfig()->get("commandtext"):
+                    case $commandText:
                         $this->getAllSigns()->getServer()->dispatchCommand($player, $text[2] . $text[3]);
                         break;
                 }

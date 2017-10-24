@@ -28,15 +28,17 @@ class SignUpdate extends PluginTask {
                 if($tile instanceof Sign) {
                     $text = $tile->getText();
 
-                    if($text[0] == $this->getAllSigns()->getConfig()->get("worldtext")) {
+                    $worldText = $this->getAllSigns()->getConfig()->getNested("world.text");
+
+                    if($text[0] == $worldText) {
                         if($this->getAllSigns()->getServer()->isLevelGenerated($text[1])) {
                             if($level = $this->getAllSigns()->getServer()->getLevelByName($text[1])) {
-                                $tile->setText($text[0], $text[1], $text[2], count($level->getPlayers()) . " " . $this->getAllSigns()->getConfig()->get("players"));
+                                $tile->setText($worldText, $text[1], $text[2], $this->getAllSigns()->getMessage("players", array("count" => count($level->getPlayers()))));
                             } else {
-                                $tile->setText($text[0], $text[1], $text[2], "0 " . $this->getAllSigns()->getConfig()->get("players"));
+                                $tile->setText($worldText, $text[1], $text[2], $this->getAllSigns()->getMessage("players", array("count" => 0)));
                             }
                         } else {
-                            $tile->setText($text[0], $text[1], $text[2], $this->getAllSigns()->getConfig()->get("error"));
+                            $tile->setText($text[0], $text[1], $text[2], $this->getAllSigns()->getMessage("error"));
                         }
                     }
                 }
