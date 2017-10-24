@@ -6,10 +6,10 @@ Turn signs into world teleport and command signs
 [Get the latest AllSigns artifacts (PHAR file) here](https://poggit.pmmp.io/ci/survanetwork/AllSigns/AllSigns)
 
 ## Creating signs
-You can create world signs to teleport the player to a world or command signs which are running a specific command when the player touches it.
+You can create world signs to teleport the player to a world or command signs which are running a specific command when a player touches it.
 
 ### World
-To create a world sign which teleports the player to a specific world when he is touches and is showing how many players are in the world, just create a sign like this and touch it.
+To create a world sign which teleports a player to a specific world when he touches and is showing how many players are in the world, just create a sign like this and touch it.
 
 ![](http://i.imgur.com/UbEQBJE.png)
 
@@ -20,7 +20,7 @@ So write the sign like that:
 4. anything like a description of the world or leave blank 
 
 ### Command
-To create a command sign which executes a specific command when he touches it, just create a sign like this and touch it.
+To create a command sign which executes a specific command when a player touches it, just create a sign like this and touch it.
 
 ![](http://i.imgur.com/1EqidAN.png)
 
