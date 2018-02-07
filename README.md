@@ -52,9 +52,9 @@ So write the sign like that:
 Feel free to contribute if you have ideas or found an issue.
 
 You can:
-- [open an issue](https://github.com/survanetwork/BadWordBlocker/issues) (problems, bugs or feature requests)
-- [create a pull request](https://github.com/survanetwork/BadWordBlocker/pulls) (code contributions like fixed bugs or added features)
-- [help translating the plugin](https://github.com/survanetwork/BadWordBlocker/tree/master/resources/languages) (create a new language file or correct an existing one)
+- [open an issue](https://github.com/survanetwork/AllSigns/issues) (problems, bugs or feature requests)
+- [create a pull request](https://github.com/survanetwork/AllSigns/pulls) (code contributions like fixed bugs or added features)
+- [help translating the plugin](https://github.com/survanetwork/AllSigns/tree/master/resources/languages) (create a new language file or correct an existing one)
 
 Many thanks for their support to all contributors!
 
