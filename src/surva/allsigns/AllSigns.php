@@ -20,9 +20,9 @@ class AllSigns extends PluginBase {
         $this->saveDefaultConfig();
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
-        $this->messages = new Config($this->getFile() . "resources/languages/" . $this->getConfig()->get("language") . ".yml");
+        $this->messages = new Config($this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml");
 
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new SignUpdate($this), 60);
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new SignUpdate($this), ($this->getConfig()->get("updateinterval", 3) * 20));
     }
 
     /**
