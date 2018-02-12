@@ -6,8 +6,8 @@
 #                      |___/
 # (C) 2018 by surva network | https://github.com/survanetwork
 
-# German language
+# French language
 
-error: "§cFehler"
-players: "{count} Spieler"
-noworld: "§cDie Welt existiert nicht."
+error: "§cErreur"
+players: "{count} joueurs"
+noworld: "§cLa monde n’existe pas."
