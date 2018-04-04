@@ -1,20 +1,52 @@
-# AllSigns
-Turn signs into world teleport and command signs
+<p align="center">
+    <img src="icon.png" width="96px" height="96px">
+</p>
 
-![](https://poggit.pmmp.io/ci.badge/survanetwork/AllSigns/AllSigns)
+<br>
 
-[Get the latest AllSigns artifacts (PHAR file) here](https://poggit.pmmp.io/ci/survanetwork/AllSigns/AllSigns)
+<h1 align="center">AllSigns</h1>
+<p align="center">Turn signs into world teleport and command signs</p>
 
-## Description
+<br>
+
+<p align="center">
+    <a href="https://poggit.pmmp.io/p/AllSigns">
+        <img src="https://poggit.pmmp.io/shield.state/AllSigns" alt="Plugin version">
+    </a>
+    <a href="https://github.com/pmmp/PocketMine-MP">
+        <img src="https://poggit.pmmp.io/shield.api/AllSigns" alt="API version">
+    </a>
+    <a href="https://poggit.pmmp.io/p/AllSigns">
+        <img src="https://poggit.pmmp.io/shield.dl/AllSigns" alt="Downloads on Poggit">
+    </a>
+    <a href="https://github.com/survanetwork/AllSigns/blob/master/LICENSE">
+        <img src="https://img.shields.io/badge/license-CC--BY--NC--SA--4.0-orange.svg" alt="License">
+    </a>
+    <a href="https://gitter.im/survanetwork/AllSigns">
+        <img src="https://img.shields.io/gitter/room/survanetwork/AllSigns.svg" alt="Gitter">
+    </a>
+</p>
+
+##
+
+[• Description](#-description)  
+[• Features](#-features)  
+[• Usage](#-usage)  
+[• Command Signs](#-command-signs)  
+[• Teleport Signs](#-teleport-signs)  
+[• Contribution](#-contribution)  
+[• License](#%EF%B8%8F-license)
+
+## 📙 Description
 With AllSigns, you can easily create signs which are executing commands or teleporting players into another world when they tap on them.
 
-## Features
+## 🎁 Features
 - **COMMAND SIGNS** Signs executing commands when players tap them
 - **TELEPORT SIGNS** Signs teleporting players in a specific world when they tap them
 - **USABILITY** Easy to use and learn
 
-## Usage
-### Command signs
+## 🖱 Usage
+### ⌨️ Command Signs
 To create a command sign which executes a specific command when a player touches it, just create a sign like this and touch it.
 
 ![](http://i.imgur.com/1EqidAN.png)
@@ -37,7 +69,7 @@ And when you're writing your sign like that, it'll also execute the command "hel
 3. he  
 4. lp 
 
-### Teleport signs
+### 🌎 Teleport Signs
 To create a world sign which teleports a player to a specific world when he touches and is showing how many players are in the world, just create a sign like this and touch it.
 
 ![](http://i.imgur.com/UbEQBJE.png)
@@ -48,7 +80,7 @@ So write the sign like that:
 3. anything like a description of the world or leave blank  
 4. anything like a description of the world or leave blank 
 
-## Contribution
+## 🙋‍ Contribution
 Feel free to contribute if you have ideas or found an issue.
 
 You can:
@@ -56,9 +88,11 @@ You can:
 - [create a pull request](https://github.com/survanetwork/AllSigns/pulls) (code contributions like fixed bugs or added features)
 - [help translating the plugin](https://github.com/survanetwork/AllSigns/tree/master/resources/languages) (create a new language file or correct an existing one)
 
+Please read our **[Contribution Guidelines](CONTRIBUTING.md)** before creating an issue or submitting a pull request.
+
 Many thanks for their support to all contributors!
 
-## License & Credits
+## 👨‍⚖️ License
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 [AllSigns](https://github.com/survanetwork/AllSigns) by [surva network](https://github.com/survanetwork) is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/). Permissions beyond the scope of this license may be available on request.

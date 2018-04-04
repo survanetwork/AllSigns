@@ -51,9 +51,22 @@ class EventListener implements Listener {
                     case $worldIdentifier:
                         if($this->getAllSigns()->getServer()->loadLevel($text[1])) {
                             if($level = $this->getAllSigns()->getServer()->getLevelByName($text[1])) {
-                                $tile->setText($worldText, $text[1], $text[2], $this->getAllSigns()->getMessage("players", array("count" => count($level->getPlayers()))));
+                                $tile->setText(
+                                    $worldText,
+                                    $text[1],
+                                    $text[2],
+                                    $this->getAllSigns()->getMessage(
+                                        "players",
+                                        array("count" => count($level->getPlayers()))
+                                    )
+                                );
                             } else {
-                                $tile->setText($worldText, $text[1], $text[2], $this->getAllSigns()->getMessage("players", array("count" => 0)));
+                                $tile->setText(
+                                    $worldText,
+                                    $text[1],
+                                    $text[2],
+                                    $this->getAllSigns()->getMessage("players", array("count" => 0))
+                                );
                             }
                         } else {
                             $block->getLevel()->setBlock($block, Block::get(Block::AIR));
