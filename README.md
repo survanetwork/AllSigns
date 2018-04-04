@@ -32,7 +32,7 @@
 [• Description](#-description)  
 [• Features](#-features)  
 [• Usage](#-usage)  
-[• Command Signs](#-command-signs)  
+[• Command Signs](#%EF%B8%8F-command-signs)  
 [• Teleport Signs](#-teleport-signs)  
 [• Contribution](#-contribution)  
 [• License](#%EF%B8%8F-license)
