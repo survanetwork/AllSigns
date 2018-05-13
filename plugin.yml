@@ -1,4 +1,8 @@
 name: AllSigns
 main: surva\allsigns\AllSigns
-version: 1.0.8
-api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10, 3.0.0-ALPHA11]
+version: 1.0.9
+api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10, 3.0.0-ALPHA11, 3.0.0-ALPHA12]
+
+author: survanetwork
+description: Turn signs into world teleport and command signs
+website: https://github.com/survanetwork/AllSigns
