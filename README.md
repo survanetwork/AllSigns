@@ -5,7 +5,7 @@
 <br>
 
 <h1 align="center">AllSigns</h1>
-<p align="center">Turn signs into world teleport and command signs</p>
+<p align="center">Turn signs into World Teleport and Command Signs</p>
 
 <br>
 
