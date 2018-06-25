@@ -8,18 +8,16 @@
 
 namespace surva\allsigns\tasks;
 
+use pocketmine\scheduler\Task;
 use surva\allsigns\AllSigns;
-use pocketmine\scheduler\PluginTask;
 use pocketmine\tile\Sign;
 
-class SignUpdate extends PluginTask {
+class SignUpdate extends Task {
     /* @var AllSigns */
     private $allSigns;
 
     public function __construct(AllSigns $allSigns) {
         $this->allSigns = $allSigns;
-
-        parent::__construct($allSigns);
     }
 
     public function onRun(int $currentTick) {

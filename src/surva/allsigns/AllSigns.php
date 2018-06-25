@@ -24,7 +24,7 @@ class AllSigns extends PluginBase {
             $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
         );
 
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(
+        $this->getScheduler()->scheduleRepeatingTask(
             new SignUpdate($this),
             ($this->getConfig()->get("updateinterval", 3) * 20)
         );
