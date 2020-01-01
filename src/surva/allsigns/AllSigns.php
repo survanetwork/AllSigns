@@ -1,13 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: surva
- * Date: 14.05.16
- * Time: 12:01
+ * AllSigns | plugin main class
  */
 
 namespace surva\allsigns;
 
+use pocketmine\tile\Sign;
 use pocketmine\utils\Config;
 use surva\allsigns\tasks\SignUpdate;
 use pocketmine\plugin\PluginBase;
@@ -28,6 +26,34 @@ class AllSigns extends PluginBase {
             new SignUpdate($this),
             ($this->getConfig()->get("updateinterval", 3) * 20)
         );
+    }
+
+    /**
+     * Updates the content of a world sign
+     *
+     * @param Sign $sign
+     * @param array $signText
+     * @param string $worldText
+     */
+    public function updateWorldSign(Sign $sign, array $signText, string $worldText): void {
+        if($level = $this->getServer()->getLevelByName($signText[1])) {
+            $sign->setText(
+                $worldText,
+                $signText[1],
+                $signText[2],
+                $this->getMessage(
+                    "players",
+                    array("count" => count($level->getPlayers()))
+                )
+            );
+        } else {
+            $sign->setText(
+                $worldText,
+                $signText[1],
+                $signText[2],
+                $this->getMessage("players", array("count" => 0))
+            );
+        }
     }
 
     /**

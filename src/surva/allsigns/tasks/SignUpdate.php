@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Jarne
- * Date: 14.05.16
- * Time: 12:23
+ * AllSigns | sign update task
  */
 
 namespace surva\allsigns\tasks;
@@ -21,46 +18,22 @@ class SignUpdate extends Task {
     }
 
     public function onRun(int $currentTick) {
-        foreach($this->getAllSigns()->getServer()->getLevels() as $level) {
+        foreach($this->allSigns->getServer()->getLevels() as $level) {
             foreach($level->getTiles() as $tile) {
                 if($tile instanceof Sign) {
                     $text = $tile->getText();
 
-                    $worldText = $this->getAllSigns()->getConfig()->getNested("world.text");
+                    $worldText = $this->allSigns->getConfig()->getNested("world.text");
 
-                    if($text[0] == $worldText) {
-                        if($this->getAllSigns()->getServer()->isLevelGenerated($text[1])) {
-                            if($level = $this->getAllSigns()->getServer()->getLevelByName($text[1])) {
-                                $tile->setText(
-                                    $worldText,
-                                    $text[1],
-                                    $text[2],
-                                    $this->getAllSigns()->getMessage(
-                                        "players",
-                                        array("count" => count($level->getPlayers()))
-                                    )
-                                );
-                            } else {
-                                $tile->setText(
-                                    $worldText,
-                                    $text[1],
-                                    $text[2],
-                                    $this->getAllSigns()->getMessage("players", array("count" => 0))
-                                );
-                            }
+                    if($text[0] === $worldText) {
+                        if($this->allSigns->getServer()->isLevelGenerated($text[1])) {
+                            $this->allSigns->updateWorldSign($tile, $text, $worldText);
                         } else {
-                            $tile->setText($text[0], $text[1], $text[2], $this->getAllSigns()->getMessage("error"));
+                            $tile->setText($text[0], $text[1], $text[2], $this->allSigns->getMessage("error"));
                         }
                     }
                 }
             }
         }
-    }
-
-    /**
-     * @return AllSigns
-     */
-    public function getAllSigns(): AllSigns {
-        return $this->allSigns;
     }
 }
