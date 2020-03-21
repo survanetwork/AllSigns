@@ -13,11 +13,21 @@ class SignUpdate extends Task {
     /* @var AllSigns */
     private $allSigns;
 
+    /**
+     * SignUpdate constructor
+     *
+     * @param AllSigns $allSigns
+     */
     public function __construct(AllSigns $allSigns) {
         $this->allSigns = $allSigns;
     }
 
-    public function onRun(int $currentTick) {
+    /**
+     * Task run
+     *
+     * @param int $currentTick
+     */
+    public function onRun(int $currentTick): void {
         foreach($this->allSigns->getServer()->getLevels() as $level) {
             foreach($level->getTiles() as $tile) {
                 if($tile instanceof Sign) {

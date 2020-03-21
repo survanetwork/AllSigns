@@ -14,13 +14,17 @@ class AllSigns extends PluginBase {
     /* @var Config */
     private $messages;
 
-    public function onEnable() {
+    /**
+     * Plugin has been enabled, initial setup
+     */
+    public function onEnable(): void {
         $this->saveDefaultConfig();
-        $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
         $this->messages = new Config(
             $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
         );
+
+        $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
         $this->getScheduler()->scheduleRepeatingTask(
             new SignUpdate($this),
@@ -64,7 +68,7 @@ class AllSigns extends PluginBase {
      * @return string
      */
     public function getMessage(string $key, array $replaces = array()): string {
-        if($rawMessage = $this->getMessages()->getNested($key)) {
+        if($rawMessage = $this->messages->getNested($key)) {
             if(is_array($replaces)) {
                 foreach($replaces as $replace => $value) {
                     $rawMessage = str_replace("{" . $replace . "}", $value, $rawMessage);
@@ -75,12 +79,5 @@ class AllSigns extends PluginBase {
         }
 
         return $key;
-    }
-
-    /**
-     * @return Config
-     */
-    public function getMessages(): Config {
-        return $this->messages;
     }
 }

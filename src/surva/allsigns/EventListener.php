@@ -14,11 +14,18 @@ class EventListener implements Listener {
     /* @var AllSigns */
     private $allSigns;
 
+    /**
+     * EventListener constructor
+     *
+     * @param AllSigns $allSigns
+     */
     public function __construct(AllSigns $allSigns) {
         $this->allSigns = $allSigns;
     }
 
     /**
+     * Check for a signs and run actions on player interact
+     *
      * @param PlayerInteractEvent $event
      */
     public function onPlayerInteract(PlayerInteractEvent $event): void {
