@@ -20,8 +20,8 @@
     <a href="https://github.com/survanetwork/AllSigns/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/license-CC--BY--NC--SA--4.0-orange.svg" alt="License">
     </a>
-    <a href="https://gitter.im/survanetwork/AllSigns">
-        <img src="https://img.shields.io/gitter/room/survanetwork/AllSigns.svg" alt="Gitter">
+    <a href="https://discord.gg/t4Kg4j3829">
+        <img src="https://img.shields.io/discord/685532530451283997?color=blueviolet" alt="Discord">
     </a>
     <a href="https://twitter.com/survanetwork">
         <img src="https://img.shields.io/twitter/url?label=SURVA%20network%20on%20Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fsurvanetwork" alt="Twitter">
@@ -84,6 +84,8 @@ So write the sign like that:
 2. the name of the world (e.g. lobby) 
 3. anything like a description of the world or leave blank  
 4. anything like a description of the world or leave blank 
+
+[Read the full documentation 📖](https://plugins.surva.net/docs/AllSigns) • [Ask questions on Discord 💬](https://discord.gg/t4Kg4j3829)
 
 ## 🙋‍ Contribution
 Feel free to contribute if you have ideas or found an issue.
