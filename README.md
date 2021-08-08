@@ -47,45 +47,34 @@ With AllSigns, you can easily create signs which are executing commands or telep
 
 ## 🎁 Features
 - **COMMAND SIGNS** Signs executing commands when players tap them
-- **TELEPORT SIGNS** Signs teleporting players in a specific world when they tap them
-- **USABILITY** Easy to use and learn
+- **TELEPORT SIGNS** Signs teleporting players in a specific world/coordinates when they tap them
+- **USABILITY** Easy to use with in-game form windows, no need to use commands or edit config files
 
 ## 🖱 Usage
+Please see the [full documentation 📖](https://plugins.surva.net/docs/AllSigns) for a detailed description of all features.
+
+To create a new AllSign, place a sign and write `#as` into the first line. A form wizard will open where you can configure all settings for the sign.
+
+![](.github/.media/create-new-sign.png)
+
 ### ⌨️ Command Signs
-To create a command sign which executes a specific command when a player touches it, just create a sign like this and touch it.
+To create a command sign which executes a specific command when a player touches it, just create a sign like described above.
 
-![](http://i.imgur.com/1EqidAN.png)
-
-Write the sign like that:  
-1. command  
-2. anything like a description of the command or leave blank 
-3. the first part of the command  
-4. the second part of the command  
-
-So when you are writing your sign like this, it'll execute the command "help". 
-1. command
-2. this is a test description 
-3. help  
-4. nothing (leave blank) 
-
-And when you're writing your sign like that, it'll also execute the command "help".  
-1. command
-2. this is a test description 
-3. he  
-4. lp 
+![](.github/.media/command-sign.png)
 
 ### 🌎 Teleport Signs
-To create a world sign which teleports a player to a specific world when he touches and is showing how many players are in the world, just create a sign like this and touch it.
+To create a world sign which teleports a player to a specific world or coordinates, create a sign like described above.
 
-![](http://i.imgur.com/UbEQBJE.png)
+![](.github/.media/teleport-sign.png)
 
-So write the sign like that:  
-1. world  
-2. the name of the world (e.g. lobby) 
-3. anything like a description of the world or leave blank  
-4. anything like a description of the world or leave blank 
+To edit a sign, touch it with a golden pickaxe. If you want to remove a sign, just break it.
 
 [Read the full documentation 📖](https://plugins.surva.net/docs/AllSigns) • [Ask questions on Discord 💬](https://discord.gg/t4Kg4j3829)
+
+## 🚧 Upgrade from v1
+The second version of AllSigns is a complete rewrite of the plugin. Because of fundamental changes in the way how the plugin works, an upgrade from v1 is not supported, meaning all signs created in v1 need to be re-created.
+
+If you want to [upgrade to v2](https://plugins.surva.net/docs/AllSigns/#upgradev1), please delete all config files of the plugin first by deleting the plugin_data/AllSigns folder in the PocketMine directory. You can then just replace the PHAR-file of the plugin and start using v2.
 
 ## 🙋‍ Contribution
 Feel free to contribute if you have ideas or found an issue.
