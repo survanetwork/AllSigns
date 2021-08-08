@@ -4,21 +4,8 @@
 #  / ___ \| | |___) | | (_| | | | \__ \
 # /_/   \_\_|_|____/|_|\__, |_| |_|___/
 #                      |___/
-# (C) 2018 by surva network | https://github.com/survanetwork
+# (C) 2021 by surva network | https://github.com/survanetwork
 
 # Language of the plugin messages
-# Possible options are: en (English), de (German), fr (French), tr (Turkish)
+# Possible options are: en (English), de (German)
 language: "en"
-
-# Text on the sign to create a world sign (identifier) and which is displayed when it's created (text)
-world:
-  identifier: "world"
-  text: "§9World"
-
-# Text on the sign to create a command sign (identifier) and which is displayed when it's created (text)
-command:
-  identifier: "command"
-  text: "§aCommand"
-
-# Set the interval in which signs are updated in seconds
-updateinterval: 3

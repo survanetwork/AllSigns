@@ -5,10 +5,13 @@
 
 namespace surva\allsigns;
 
-use pocketmine\block\Block;
+use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\block\SignChangeEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\tile\Sign;
+use pocketmine\item\ItemIds;
+use surva\allsigns\form\SelectTypeForm;
+use surva\allsigns\util\AllSignsGeneral;
 
 class EventListener implements Listener
 {
@@ -27,66 +30,85 @@ class EventListener implements Listener
     }
 
     /**
-     * Check for a signs and run actions on player interact
+     * Monitor when signs are changing their content to create new magic signs
      *
-     * @param  PlayerInteractEvent  $event
+     * @param  \pocketmine\event\block\SignChangeEvent  $ev
      */
-    public function onPlayerInteract(PlayerInteractEvent $event): void
+    public function onSignChange(SignChangeEvent $ev): void
     {
-        $player = $event->getPlayer();
-        $action = $event->getAction();
-        $block  = $event->getBlock();
+        $pl    = $ev->getPlayer();
+        $block = $ev->getBlock();
 
-        if (
-          (
-            $block->getId() === Block::SIGN_POST or
-            $block->getId() === Block::WALL_SIGN
-          ) and
-          $action === PlayerInteractEvent::RIGHT_CLICK_BLOCK
+        $firstLine = strtolower($ev->getLine(0));
+
+        if ($firstLine === AllSignsGeneral::ID_SEPARATOR . "allsigns"
+            || $firstLine === AllSignsGeneral::ID_SEPARATOR . "as"
         ) {
-            $tile = $block->getLevel()->getTile($block);
+            if (!$pl->hasPermission("allsigns.create")) {
+                $pl->sendMessage($this->allSigns->getMessage("form.nopermission"));
 
-            if ($tile instanceof Sign) {
-                $text = $tile->getText();
-
-                $worldIdentifier = $this->allSigns->getConfig()->getNested("world.identifier", "world");
-                $worldText       = $this->allSigns->getConfig()->getNested("world.text", "§9World");
-
-                $commandIdentifier = $this->allSigns->getConfig()->getNested("command.identifier", "command");
-                $commandText       = $this->allSigns->getConfig()->getNested("command.text", "§aCommand");
-
-                switch ($text[0]) {
-                    case $worldIdentifier:
-                        if ($this->allSigns->getServer()->loadLevel($text[1])) {
-                            $this->allSigns->updateWorldSign($tile, $text, $worldText);
-                        } else {
-                            $block->getLevel()->setBlock($block, Block::get(Block::AIR));
-
-                            $player->sendMessage($this->allSigns->getMessage("noworld"));
-                        }
-                        break;
-                    case $commandIdentifier:
-                        $tile->setText($commandText, $text[1], $text[2], $text[3]);
-                        break;
-                    case $worldText:
-                        if ($this->allSigns->getServer()->loadLevel($text[1])) {
-                            if ($level = $this->allSigns->getServer()->getLevelByName($text[1])) {
-                                $player->teleport($level->getSafeSpawn());
-                            } else {
-                                $player->sendMessage($this->allSigns->getMessage("noworld"));
-                            }
-                        } else {
-                            $block->getLevel()->setBlock($block, Block::get(Block::AIR));
-
-                            $player->sendMessage($this->allSigns->getMessage("noworld"));
-                        }
-                        break;
-                    case $commandText:
-                        $this->allSigns->getServer()->dispatchCommand($player, $text[2] . $text[3]);
-                        break;
-                }
+                return;
             }
+
+            $selectTypeForm = new SelectTypeForm($this->allSigns, $block);
+            $pl->sendForm($selectTypeForm);
         }
+    }
+
+    /**
+     * Check if a player interacts with a magic sign
+     *
+     * @param  \pocketmine\event\player\PlayerInteractEvent  $ev
+     */
+    public function onPlayerInteract(PlayerInteractEvent $ev): void
+    {
+        $pl    = $ev->getPlayer();
+        $item  = $ev->getItem();
+        $block = $ev->getBlock();
+
+        if (($sign = $this->allSigns->getMagicSignByBlock($block)) === null) {
+            return;
+        }
+
+        $mode = $item->getId() === ItemIds::GOLD_PICKAXE ? AllSignsGeneral::EDIT_MODE : AllSignsGeneral::INTERACT_MODE;
+
+        if ($mode === AllSignsGeneral::EDIT_MODE) {
+            if (!$pl->hasPermission("allsigns.create")) {
+                $pl->sendMessage($this->allSigns->getMessage("form.nopermission"));
+
+                return;
+            }
+        } elseif (!$pl->hasPermission("allsigns.use")) {
+            $pl->sendMessage($this->allSigns->getMessage("form.nousepermission"));
+
+            return;
+        }
+
+        $sign->handleSignInteraction($pl, $mode);
+    }
+
+    /**
+     * Check if a player breaks a magic sign
+     *
+     * @param  \pocketmine\event\block\BlockBreakEvent  $ev
+     */
+    public function onBlockBreak(BlockBreakEvent $ev): void
+    {
+        $pl    = $ev->getPlayer();
+        $block = $ev->getBlock();
+
+        if (($sign = $this->allSigns->getMagicSignByBlock($block)) === null) {
+            return;
+        }
+
+        if (!$pl->hasPermission("allsigns.create")) {
+            $pl->sendMessage($this->allSigns->getMessage("form.nopermission"));
+
+            $ev->setCancelled();
+            return;
+        }
+
+        $sign->remove();
     }
 
 }

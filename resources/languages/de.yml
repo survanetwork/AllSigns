@@ -4,10 +4,37 @@
 #  / ___ \| | |___) | | (_| | | | \__ \
 # /_/   \_\_|_|____/|_|\__, |_| |_|___/
 #                      |___/
-# (C) 2018 by surva network | https://github.com/survanetwork
+# (C) 2021 by surva network | https://github.com/survanetwork
 
 # German language
 
-error: "§cFehler"
-players: "{count} Spieler"
-noworld: "§cDie Welt existiert nicht."
+# Create/edit forms translation
+form:
+  nopermission: "§cDu hast keine Berechtigung, Schilder zu erstellen oder zu bearbeiten!"
+  nousepermission: "§cDu hast keine Berechtigung, dieses Schild zu benutzen!"
+  typeselect: # Sign type select form
+    title: "§eSchild-Typ auswählen"
+    select: "Wähle den Typ des Schilds, das du erstellen möchtest"
+  commandsign: # Create/edit command sign form
+    title: "§6Befehlsschild"
+    command: "§cBefehl, der ausgeführt wird"
+    context: "Ausführen als"
+    player: "§eSpieler"
+    server: "§cServer"
+    text: "§aText auf dem Schild"
+    permission: "§6Berechtigung für das Schild"
+    success: "§aBefehlsschild wurde erfolgreich erstellt!"
+    error: "§cBefehlsschild konnte nicht erstellt werden!"
+  teleportsign: # Create/edit teleport sign form
+    title: "§bTeleport-Schild"
+    world: "§cZiel-Welt"
+    xc: "x Koordinate"
+    yc: "y Koordinate"
+    zc: "z Koordinate"
+    success: "§aTeleport-Schild wurde erfolgreich erstellt!"
+    error: "§cTeleport-Schild konnte nicht erstellt werden!"
+
+# Different types of signs
+signtypes:
+  command: "§6Befehl"
+  teleport: "§bTeleport"
