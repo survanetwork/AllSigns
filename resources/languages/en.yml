@@ -4,10 +4,37 @@
 #  / ___ \| | |___) | | (_| | | | \__ \
 # /_/   \_\_|_|____/|_|\__, |_| |_|___/
 #                      |___/
-# (C) 2018 by surva network | https://github.com/survanetwork
+# (C) 2021 by surva network | https://github.com/survanetwork
 
 # English language
 
-error: "§cError"
-players: "{count} players"
-noworld: "§cWorld does not exist."
+# Create/edit forms translation
+form:
+  nopermission: "§cYou don't have the permission to create/edit signs!"
+  nousepermission: "§cYou don't have the permission to use this sign!"
+  typeselect: # Sign type select form
+    title: "§eSelect sign type"
+    select: "Select the type of the sign you want to create"
+  commandsign: # Create/edit command sign form
+    title: "§6Command sign"
+    command: "§cCommand to execute"
+    context: "Run as"
+    player: "§ePlayer"
+    server: "§cServer"
+    text: "§aText on the sign"
+    permission: "§6Permission to use the sign"
+    success: "§aCommand sign has been successfully created!"
+    error: "§cCouldn't create command sign!"
+  teleportsign: # Create/edit teleport sign form
+    title: "§bTeleport sign"
+    world: "§cTarget world"
+    xc: "x coordinate"
+    yc: "y coordinate"
+    zc: "z coordinate"
+    success: "§aTeleport sign has been successfully created!"
+    error: "§cCouldn't create teleport sign!"
+
+# Different types of signs
+signtypes:
+  command: "§6Command"
+  teleport: "§bTeleport"

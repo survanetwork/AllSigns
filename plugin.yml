@@ -1,8 +1,16 @@
 name: AllSigns
 main: surva\allsigns\AllSigns
-version: 1.0.13
+version: 2.0.0
 api: 3.0.0
 
 author: survanetwork
 description: Turn signs into world teleport and command signs
 website: https://plugins.surva.net/#allsigns
+
+permissions:
+  allsigns.create:
+    description: "Create signs using AllSigns"
+    default: op
+  allsigns.use:
+    description: "Use signs created by AllSigns"
+    default: true
