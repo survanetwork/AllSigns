@@ -36,10 +36,11 @@ class EventListener implements Listener
      */
     public function onSignChange(SignChangeEvent $ev): void
     {
-        $pl    = $ev->getPlayer();
-        $block = $ev->getBlock();
+        $pl      = $ev->getPlayer();
+        $block   = $ev->getBlock();
+        $newText = $ev->getNewText();
 
-        $firstLine = strtolower($ev->getLine(0));
+        $firstLine = strtolower($newText->getLine(0));
 
         if ($firstLine === AllSignsGeneral::ID_SEPARATOR . "allsigns"
             || $firstLine === AllSignsGeneral::ID_SEPARATOR . "as"
@@ -104,7 +105,7 @@ class EventListener implements Listener
         if (!$pl->hasPermission("allsigns.create")) {
             $pl->sendMessage($this->allSigns->getMessage("form.nopermission"));
 
-            $ev->setCancelled();
+            $ev->cancel();
             return;
         }
 
