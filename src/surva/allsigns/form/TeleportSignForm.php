@@ -13,30 +13,15 @@ use surva\allsigns\sign\TeleportSign;
 class TeleportSignForm implements Form
 {
 
-    /**
-     * @var \surva\allsigns\AllSigns
-     */
-    private $allSigns;
+    private AllSigns $allSigns;
 
-    /**
-     * @var TeleportSign
-     */
-    private $sign;
+    private TeleportSign $sign;
 
-    /**
-     * @var string
-     */
-    private $type = "custom_form";
+    private string $type = "custom_form";
 
-    /**
-     * @var string
-     */
-    private $title;
+    private string $title;
 
-    /**
-     * @var string
-     */
-    private $content;
+    private array $content;
 
     /**
      * @param  \surva\allsigns\AllSigns  $allSigns

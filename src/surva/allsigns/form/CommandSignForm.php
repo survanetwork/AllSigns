@@ -14,30 +14,15 @@ use surva\allsigns\util\ExecutionContext;
 class CommandSignForm implements Form
 {
 
-    /**
-     * @var \surva\allsigns\AllSigns
-     */
-    private $allSigns;
+    private AllSigns $allSigns;
 
-    /**
-     * @var CommandSign
-     */
-    private $sign;
+    private CommandSign $sign;
 
-    /**
-     * @var string
-     */
-    private $type = "custom_form";
+    private string $type = "custom_form";
 
-    /**
-     * @var string
-     */
-    private $title;
+    private string $title;
 
-    /**
-     * @var string
-     */
-    private $content;
+    private array $content;
 
     /**
      * @param  \surva\allsigns\AllSigns  $allSigns
