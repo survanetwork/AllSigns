@@ -5,10 +5,10 @@
 
 namespace surva\allsigns\sign;
 
-use pocketmine\block\BaseSign;
 use pocketmine\block\Block;
-use pocketmine\block\utils\SignText;
-use pocketmine\player\Player;
+use pocketmine\level\Level;
+use pocketmine\Player;
+use pocketmine\tile\Sign;
 use surva\allsigns\AllSigns;
 use surva\allsigns\util\AllSignsGeneral;
 
@@ -52,7 +52,7 @@ abstract class MagicSign
     /**
      * Handle if a player interacts with a sign
      *
-     * @param  \pocketmine\player\Player  $player
+     * @param  \pocketmine\Player  $player
      * @param  int  $mode
      */
     public function handleSignInteraction(Player $player, int $mode = AllSignsGeneral::INTERACT_MODE): void
@@ -73,11 +73,12 @@ abstract class MagicSign
     /**
      * Save to config and update sign block
      *
+     * @param  \pocketmine\level\Level  $lvl
      * @param  string  $text
      *
      * @return bool
      */
-    protected function createSignInternally(string $text): bool
+    protected function createSignInternally(Level $lvl, string $text): bool
     {
         if ($this->signId === null) {
             $this->signId = $this->allSigns->nextSignId();
@@ -87,19 +88,14 @@ abstract class MagicSign
 
         $this->allSigns->getSignStorage()->save();
 
-        if (!($this->signBlock instanceof BaseSign)) {
+        $sign = $lvl->getTile($this->signBlock);
+
+        if (!($sign instanceof Sign)) {
             return false;
         }
 
-        $pos = $this->signBlock->getPosition();
-
-        $this->signBlock = $this->signBlock->setText(
-          new SignText([
-            AllSignsGeneral::SIGN_IDENTIFIER . AllSignsGeneral::ID_SEPARATOR . $this->signId,
-            $text,
-          ])
-        );
-        $pos->getWorld()->setBlock($pos, $this->signBlock);
+        $sign->setLine(0, AllSignsGeneral::SIGN_IDENTIFIER . AllSignsGeneral::ID_SEPARATOR . $this->signId);
+        $sign->setLine(1, $text);
 
         return true;
     }
@@ -117,7 +113,7 @@ abstract class MagicSign
     /**
      * Handle if a player interacts with a sign
      *
-     * @param  \pocketmine\player\Player  $player
+     * @param  \pocketmine\Player  $player
      */
     abstract protected function internallyHandleSignInteraction(Player $player): void;
 
@@ -135,7 +131,7 @@ abstract class MagicSign
     /**
      * Send the creation form to the player
      *
-     * @param  \pocketmine\player\Player  $player
+     * @param  \pocketmine\Player  $player
      * @param  array|null  $existingData
      */
     abstract public function sendCreateForm(Player $player, ?array $existingData = null): void;

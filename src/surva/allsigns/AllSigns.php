@@ -5,9 +5,9 @@
 
 namespace surva\allsigns;
 
-use pocketmine\block\BaseSign;
 use pocketmine\block\Block;
 use pocketmine\plugin\PluginBase;
+use pocketmine\tile\Sign;
 use pocketmine\utils\Config;
 use surva\allsigns\sign\CommandSign;
 use surva\allsigns\sign\MagicSign;
@@ -84,17 +84,17 @@ class AllSigns extends PluginBase
             return null;
         }
 
-        if (($world = $block->getPosition()->getWorld()) === null) {
+        if (($level = $block->getLevel()) === null) {
             return null;
         }
 
-        if ($world->getFolderName() !== $data["world"]) {
+        if ($level->getName() !== $data["world"]) {
             return null;
         }
 
-        if ($block->getPosition()->getX() !== $data["coordinates"]["xc"]
-            || $block->getPosition()->getY() !== $data["coordinates"]["yc"]
-            || $block->getPosition()->getZ() !== $data["coordinates"]["zc"]
+        if ($block->getX() !== $data["coordinates"]["xc"]
+            || $block->getY() !== $data["coordinates"]["yc"]
+            || $block->getZ() !== $data["coordinates"]["zc"]
         ) {
             return null;
         }
@@ -140,17 +140,23 @@ class AllSigns extends PluginBase
     /**
      * Check if a sign is a magic sign
      *
-     * @param  \pocketmine\block\Block  $signBlock
+     * @param  \pocketmine\block\Block  $block
      *
      * @return string|null
      */
-    public function isMagicSign(Block $signBlock): ?string
+    public function isMagicSign(Block $block): ?string
     {
-        if (!($signBlock instanceof BaseSign)) {
+        if (($lvl = $block->getLevel()) === null) {
             return null;
         }
 
-        $firstLine = $signBlock->getText()->getLine(0);
+        $sign = $lvl->getTile($block);
+
+        if (!($sign instanceof Sign)) {
+            return null;
+        }
+
+        $firstLine = $sign->getLine(0);
 
         if (preg_match(
               "/^" . AllSignsGeneral::SIGN_IDENTIFIER . AllSignsGeneral::ID_SEPARATOR . "[0-9]*/",
