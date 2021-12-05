@@ -7,6 +7,7 @@ namespace surva\allsigns;
 
 use pocketmine\block\BaseSign;
 use pocketmine\plugin\PluginBase;
+use pocketmine\tile\Sign;
 use pocketmine\utils\Config;
 use surva\allsigns\sign\CommandSign;
 use surva\allsigns\sign\MagicSign;
@@ -75,7 +76,7 @@ class AllSigns extends PluginBase
             return null;
         }
 
-        if ($world->getFolderName() !== $data["world"]) {
+        if ($level->getName() !== $data["world"]) {
             return null;
         }
 
