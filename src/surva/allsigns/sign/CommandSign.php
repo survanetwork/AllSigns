@@ -5,8 +5,9 @@
 
 namespace surva\allsigns\sign;
 
-use pocketmine\command\ConsoleCommandSender;
-use pocketmine\Player;
+use pocketmine\console\ConsoleCommandSender;
+use pocketmine\player\Player;
+use pocketmine\Server;
 use surva\allsigns\form\CommandSignForm;
 use surva\allsigns\util\ExecutionContext;
 use surva\allsigns\util\SignType;
@@ -32,7 +33,8 @@ class CommandSign extends MagicSign
         $sender = $player;
 
         if ($context === ExecutionContext::CONTEXT_SERVER) {
-            $sender = new ConsoleCommandSender();
+            $server = Server::getInstance();
+            $sender = new ConsoleCommandSender($server, $server->getLanguage());
         }
 
         $command = $this->replaceVariables($command, $player);
@@ -45,16 +47,16 @@ class CommandSign extends MagicSign
      */
     public function createSign(array $signData, string $text, string $permission): bool
     {
-        if (($lvl = $this->signBlock->getLevel()) === null) {
+        if (($wld = $this->signBlock->getPosition()->getWorld()) === null) {
             return false;
         }
 
         $this->data = [
-          "world"       => $lvl->getName(),
+          "world"       => $wld->getFolderName(),
           "coordinates" => [
-            "xc" => $this->signBlock->getX(),
-            "yc" => $this->signBlock->getY(),
-            "zc" => $this->signBlock->getZ(),
+            "xc" => $this->signBlock->getPosition()->getX(),
+            "yc" => $this->signBlock->getPosition()->getY(),
+            "zc" => $this->signBlock->getPosition()->getZ(),
           ],
           "type"        => SignType::COMMAND_SIGN,
           "settings"    => [
@@ -65,7 +67,7 @@ class CommandSign extends MagicSign
           ],
         ];
 
-        return $this->createSignInternally($lvl, $text);
+        return $this->createSignInternally($text);
     }
 
     /**
@@ -81,19 +83,19 @@ class CommandSign extends MagicSign
      * Replace variables in a command string
      *
      * @param  string  $givenCommand
-     * @param  \pocketmine\Player  $player
+     * @param  \pocketmine\player\Player  $player
      *
      * @return string
      */
     private function replaceVariables(string $givenCommand, Player $player): string
     {
         $givenCommand = str_replace("{player}", $player->getName(), $givenCommand);
-        $givenCommand = str_replace("{xc}", $player->getX(), $givenCommand);
-        $givenCommand = str_replace("{yc}", $player->getY(), $givenCommand);
-        $givenCommand = str_replace("{zc}", $player->getZ(), $givenCommand);
+        $givenCommand = str_replace("{xc}", $player->getPosition()->getX(), $givenCommand);
+        $givenCommand = str_replace("{yc}", $player->getPosition()->getY(), $givenCommand);
+        $givenCommand = str_replace("{zc}", $player->getPosition()->getZ(), $givenCommand);
 
-        if (($lvl = $player->getLevel()) !== null) {
-            $givenCommand = str_replace("{world}", $lvl->getName(), $givenCommand);
+        if (($wld = $player->getWorld()) !== null) {
+            $givenCommand = str_replace("{world}", $wld->getFolderName(), $givenCommand);
         }
 
         return $givenCommand;

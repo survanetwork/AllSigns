@@ -6,7 +6,7 @@
 namespace surva\allsigns\form;
 
 use pocketmine\form\Form;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use surva\allsigns\AllSigns;
 use surva\allsigns\sign\CommandSign;
 use surva\allsigns\util\ExecutionContext;
@@ -68,7 +68,7 @@ class CommandSignForm implements Form
     /**
      * Getting a response from the client form
      *
-     * @param  \pocketmine\Player  $player
+     * @param  \pocketmine\player\Player  $player
      * @param  mixed  $data
      */
     public function handleResponse(Player $player, $data): void

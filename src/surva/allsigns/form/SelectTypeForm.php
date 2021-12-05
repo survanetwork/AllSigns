@@ -7,7 +7,7 @@ namespace surva\allsigns\form;
 
 use pocketmine\block\BaseSign;
 use pocketmine\form\Form;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use surva\allsigns\AllSigns;
 use surva\allsigns\sign\CommandSign;
 use surva\allsigns\sign\TeleportSign;
@@ -52,7 +52,7 @@ class SelectTypeForm implements Form
     /**
      * Getting a response from the client form
      *
-     * @param  \pocketmine\Player  $player
+     * @param  \pocketmine\player\Player  $player
      * @param  mixed  $data
      */
     public function handleResponse(Player $player, $data): void

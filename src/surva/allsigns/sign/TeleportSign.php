@@ -5,8 +5,8 @@
 
 namespace surva\allsigns\sign;
 
-use pocketmine\level\Position;
-use pocketmine\Player;
+use pocketmine\player\Player;
+use pocketmine\world\Position;
 use surva\allsigns\form\TeleportSignForm;
 use surva\allsigns\util\SignType;
 
@@ -30,20 +30,20 @@ class TeleportSign extends MagicSign
             return;
         }
 
-        if (!$this->allSigns->getServer()->isLevelLoaded($worldName)) {
-            $this->allSigns->getServer()->loadLevel($worldName);
+        if (!$this->allSigns->getServer()->getWorldManager()->isWorldLoaded($worldName)) {
+            $this->allSigns->getServer()->getWorldManager()->loadWorld($worldName);
         }
 
-        $level = $this->allSigns->getServer()->getLevelByName($worldName);
+        $pmWorld = $this->allSigns->getServer()->getWorldManager()->getWorldByName($worldName);
 
-        if ($level === null) {
+        if ($pmWorld === null) {
             return;
         }
 
         if ($x !== "" && $y !== "" && $z !== "") {
-            $player->teleport(new Position(floatval($x), floatval($y), floatval($z), $level));
+            $player->teleport(new Position(floatval($x), floatval($y), floatval($z), $pmWorld));
         } else {
-            $player->teleport($level->getSafeSpawn());
+            $player->teleport($pmWorld->getSafeSpawn());
         }
     }
 
@@ -52,16 +52,16 @@ class TeleportSign extends MagicSign
      */
     public function createSign(array $signData, string $text, string $permission): bool
     {
-        if (($lvl = $this->signBlock->getLevel()) === null) {
+        if (($wld = $this->signBlock->getPosition()->getWorld()) === null) {
             return false;
         }
 
         $this->data = [
-          "world"       => $lvl->getName(),
+          "world"       => $wld->getFolderName(),
           "coordinates" => [
-            "xc" => $this->signBlock->getX(),
-            "yc" => $this->signBlock->getY(),
-            "zc" => $this->signBlock->getZ(),
+            "xc" => $this->signBlock->getPosition()->getX(),
+            "yc" => $this->signBlock->getPosition()->getY(),
+            "zc" => $this->signBlock->getPosition()->getZ(),
           ],
           "type"        => SignType::TELEPORT_SIGN,
           "settings"    => [
@@ -74,7 +74,7 @@ class TeleportSign extends MagicSign
           ],
         ];
 
-        return $this->createSignInternally($lvl, $text);
+        return $this->createSignInternally($text);
     }
 
     /**

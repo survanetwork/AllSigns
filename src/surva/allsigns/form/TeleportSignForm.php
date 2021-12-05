@@ -6,7 +6,7 @@
 namespace surva\allsigns\form;
 
 use pocketmine\form\Form;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use surva\allsigns\AllSigns;
 use surva\allsigns\sign\TeleportSign;
 
@@ -36,8 +36,8 @@ class TeleportSignForm implements Form
 
         $defaultWorld = "world";
 
-        if (($lvl = $this->sign->getSignBlock()->getLevel()) !== null) {
-            $defaultWorld = $lvl->getName();
+        if (($wld = $this->sign->getSignBlock()->getPosition()->getWorld()) !== null) {
+            $defaultWorld = $wld->getFolderName();
         }
 
         $this->title   = $allSigns->getMessage("form.teleportsign.title");
@@ -78,7 +78,7 @@ class TeleportSignForm implements Form
     /**
      * Getting a response from the client form
      *
-     * @param  \pocketmine\Player  $player
+     * @param  \pocketmine\player\Player  $player
      * @param  mixed  $data
      */
     public function handleResponse(Player $player, $data): void
