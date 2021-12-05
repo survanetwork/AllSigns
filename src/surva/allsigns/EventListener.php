@@ -5,6 +5,7 @@
 
 namespace surva\allsigns;
 
+use pocketmine\block\BaseSign;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\SignChangeEvent;
 use pocketmine\event\Listener;
@@ -16,14 +17,8 @@ use surva\allsigns\util\AllSignsGeneral;
 class EventListener implements Listener
 {
 
-    /* @var AllSigns */
-    private $allSigns;
+    private AllSigns $allSigns;
 
-    /**
-     * EventListener constructor
-     *
-     * @param  AllSigns  $allSigns
-     */
     public function __construct(AllSigns $allSigns)
     {
         $this->allSigns = $allSigns;
@@ -36,8 +31,9 @@ class EventListener implements Listener
      */
     public function onSignChange(SignChangeEvent $ev): void
     {
-        $pl    = $ev->getPlayer();
-        $block = $ev->getBlock();
+        $pl        = $ev->getPlayer();
+        $signBlock = $ev->getSign();
+        $newText   = $ev->getNewText();
 
         $firstLine = strtolower($ev->getLine(0));
 
@@ -50,7 +46,7 @@ class EventListener implements Listener
                 return;
             }
 
-            $selectTypeForm = new SelectTypeForm($this->allSigns, $block);
+            $selectTypeForm = new SelectTypeForm($this->allSigns, $signBlock);
             $pl->sendForm($selectTypeForm);
         }
     }
@@ -65,6 +61,10 @@ class EventListener implements Listener
         $pl    = $ev->getPlayer();
         $item  = $ev->getItem();
         $block = $ev->getBlock();
+
+        if (!($block instanceof BaseSign)) {
+            return;
+        }
 
         if (($sign = $this->allSigns->getMagicSignByBlock($block)) === null) {
             return;
@@ -96,6 +96,10 @@ class EventListener implements Listener
     {
         $pl    = $ev->getPlayer();
         $block = $ev->getBlock();
+
+        if (!($block instanceof BaseSign)) {
+            return;
+        }
 
         if (($sign = $this->allSigns->getMagicSignByBlock($block)) === null) {
             return;

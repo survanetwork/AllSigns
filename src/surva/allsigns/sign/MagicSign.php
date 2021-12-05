@@ -5,43 +5,30 @@
 
 namespace surva\allsigns\sign;
 
-use pocketmine\block\Block;
-use pocketmine\level\Level;
-use pocketmine\Player;
-use pocketmine\tile\Sign;
+use pocketmine\block\BaseSign;
+use pocketmine\block\utils\SignText;
+use pocketmine\player\Player;
 use surva\allsigns\AllSigns;
 use surva\allsigns\util\AllSignsGeneral;
 
 abstract class MagicSign
 {
 
-    /**
-     * @var \surva\allsigns\AllSigns
-     */
-    protected $allSigns;
+    protected AllSigns $allSigns;
 
-    /**
-     * @var int|null
-     */
-    protected $signId;
+    protected ?int $signId;
 
-    /**
-     * @var Block
-     */
-    protected $signBlock;
+    protected BaseSign $signBlock;
 
-    /**
-     * @var array|null
-     */
-    protected $data;
+    protected ?array $data;
 
     /**
      * @param  \surva\allsigns\AllSigns  $allSigns
-     * @param  \pocketmine\block\Block  $signBlock
+     * @param  \pocketmine\block\BaseSign  $signBlock
      * @param  int|null  $signId
      * @param  array|null  $data
      */
-    public function __construct(AllSigns $allSigns, Block $signBlock, ?int $signId = null, ?array $data = null)
+    public function __construct(AllSigns $allSigns, BaseSign $signBlock, ?int $signId = null, ?array $data = null)
     {
         $this->allSigns  = $allSigns;
         $this->signBlock = $signBlock;
@@ -145,9 +132,9 @@ abstract class MagicSign
     }
 
     /**
-     * @return \pocketmine\block\Block
+     * @return \pocketmine\block\BaseSign
      */
-    public function getSignBlock(): Block
+    public function getSignBlock(): BaseSign
     {
         return $this->signBlock;
     }

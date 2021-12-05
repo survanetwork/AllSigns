@@ -5,7 +5,7 @@
 
 namespace surva\allsigns;
 
-use pocketmine\block\Block;
+use pocketmine\block\BaseSign;
 use pocketmine\plugin\PluginBase;
 use pocketmine\tile\Sign;
 use pocketmine\utils\Config;
@@ -18,25 +18,13 @@ use surva\allsigns\util\SignType;
 class AllSigns extends PluginBase
 {
 
-    /**
-     * @var Config
-     */
-    private $signStorage;
+    private Config $signStorage;
 
-    /**
-     * @var array
-     */
-    private $signs;
+    private array $signs;
 
-    /**
-     * @var Config
-     */
-    private $defaultMessages;
+    private Config $defaultMessages;
 
-    /**
-     * @var Config
-     */
-    private $messages;
+    private Config $messages;
 
     /**
      * Plugin has been enabled, initial setup
@@ -64,19 +52,19 @@ class AllSigns extends PluginBase
     /**
      * Get a MagicSign object using the associated block
      *
-     * @param  \pocketmine\block\Block  $block
+     * @param  \pocketmine\block\BaseSign  $signBlock
      *
      * @return \surva\allsigns\sign\MagicSign|null
      */
-    public function getMagicSignByBlock(Block $block): ?MagicSign
+    public function getMagicSignByBlock(BaseSign $signBlock): ?MagicSign
     {
-        if (($idStr = $this->isMagicSign($block)) === null) {
+        if (($idStr = $this->isMagicSign($signBlock)) === null) {
             return null;
         }
 
         $id = intval($idStr);
 
-        if (($sign = $this->loadMagicSign($id, $block)) === null) {
+        if (($sign = $this->loadMagicSign($id, $signBlock)) === null) {
             return null;
         }
 
@@ -84,7 +72,7 @@ class AllSigns extends PluginBase
             return null;
         }
 
-        if (($level = $block->getLevel()) === null) {
+        if (($world = $signBlock->getPosition()->getWorld()) === null) {
             return null;
         }
 
@@ -92,9 +80,9 @@ class AllSigns extends PluginBase
             return null;
         }
 
-        if ($block->getX() !== $data["coordinates"]["xc"]
-            || $block->getY() !== $data["coordinates"]["yc"]
-            || $block->getZ() !== $data["coordinates"]["zc"]
+        if ($signBlock->getPosition()->getX() !== $data["coordinates"]["xc"]
+            || $signBlock->getPosition()->getY() !== $data["coordinates"]["yc"]
+            || $signBlock->getPosition()->getZ() !== $data["coordinates"]["zc"]
         ) {
             return null;
         }
@@ -106,11 +94,11 @@ class AllSigns extends PluginBase
      * Get a sign from the sign object array or load from config
      *
      * @param  int  $id
-     * @param  \pocketmine\block\Block  $block
+     * @param  \pocketmine\block\BaseSign  $signBlock
      *
      * @return \surva\allsigns\sign\MagicSign|null
      */
-    private function loadMagicSign(int $id, Block $block): ?MagicSign
+    private function loadMagicSign(int $id, BaseSign $signBlock): ?MagicSign
     {
         if (isset($this->signs[$id])) {
             return $this->signs[$id];
@@ -124,10 +112,10 @@ class AllSigns extends PluginBase
 
         switch ($data["type"]) {
             case SignType::COMMAND_SIGN:
-                $sign = new CommandSign($this, $block, $id, $data);
+                $sign = new CommandSign($this, $signBlock, $id, $data);
                 break;
             case SignType::TELEPORT_SIGN:
-                $sign = new TeleportSign($this, $block, $id, $data);
+                $sign = new TeleportSign($this, $signBlock, $id, $data);
                 break;
             default:
                 return null;
@@ -140,23 +128,13 @@ class AllSigns extends PluginBase
     /**
      * Check if a sign is a magic sign
      *
-     * @param  \pocketmine\block\Block  $block
+     * @param  \pocketmine\block\BaseSign  $signBlock
      *
      * @return string|null
      */
-    public function isMagicSign(Block $block): ?string
+    public function isMagicSign(BaseSign $signBlock): ?string
     {
-        if (($lvl = $block->getLevel()) === null) {
-            return null;
-        }
-
-        $sign = $lvl->getTile($block);
-
-        if (!($sign instanceof Sign)) {
-            return null;
-        }
-
-        $firstLine = $sign->getLine(0);
+        $firstLine = $signBlock->getText()->getLine(0);
 
         if (preg_match(
               "/^" . AllSignsGeneral::SIGN_IDENTIFIER . AllSignsGeneral::ID_SEPARATOR . "[0-9]*/",

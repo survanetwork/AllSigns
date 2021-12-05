@@ -5,7 +5,7 @@
 
 namespace surva\allsigns\form;
 
-use pocketmine\block\Block;
+use pocketmine\block\BaseSign;
 use pocketmine\form\Form;
 use pocketmine\Player;
 use surva\allsigns\AllSigns;
@@ -16,38 +16,21 @@ use surva\allsigns\util\SignType;
 class SelectTypeForm implements Form
 {
 
-    /**
-     * @var \surva\allsigns\AllSigns
-     */
-    private $allSigns;
+    private AllSigns $allSigns;
+
+    private BaseSign $signBlock;
+
+    private string $type = "custom_form";
+
+    private string $title;
+
+    private array $content;
 
     /**
-     * @var Block
-     */
-    private $signBlock;
-
-    /**
-     * @var string
-     */
-    private $type = "custom_form";
-
-    /**
-     * @var string
-     */
-    private $title;
-
-    /**
-     * @var string
-     */
-    private $content;
-
-    /**
-     * SelectTypeForm constructor.
-     *
      * @param  \surva\allsigns\AllSigns  $allSigns
-     * @param  \pocketmine\block\Block  $signBlock
+     * @param  \pocketmine\block\BaseSign  $signBlock
      */
-    public function __construct(AllSigns $allSigns, Block $signBlock)
+    public function __construct(AllSigns $allSigns, BaseSign $signBlock)
     {
         $this->allSigns  = $allSigns;
         $this->signBlock = $signBlock;
