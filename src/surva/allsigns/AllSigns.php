@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AllSigns | plugin main class
  */
@@ -16,7 +17,6 @@ use surva\allsigns\util\SignType;
 
 class AllSigns extends PluginBase
 {
-
     private Config $signStorage;
 
     private array $signs;
@@ -42,7 +42,7 @@ class AllSigns extends PluginBase
 
         $this->defaultMessages = new Config($this->getFile() . "resources/languages/en.yml");
         $this->messages        = new Config(
-          $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
+            $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
         );
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
@@ -79,7 +79,8 @@ class AllSigns extends PluginBase
             return null;
         }
 
-        if ($signBlock->getPosition()->getX() !== $data["coordinates"]["xc"]
+        if (
+            $signBlock->getPosition()->getX() !== $data["coordinates"]["xc"]
             || $signBlock->getPosition()->getY() !== $data["coordinates"]["yc"]
             || $signBlock->getPosition()->getZ() !== $data["coordinates"]["zc"]
         ) {
@@ -135,9 +136,10 @@ class AllSigns extends PluginBase
     {
         $firstLine = $signBlock->getText()->getLine(0);
 
-        if (preg_match(
-              "/^" . AllSignsGeneral::SIGN_IDENTIFIER . AllSignsGeneral::ID_SEPARATOR . "[0-9]*/",
-              $firstLine
+        if (
+            preg_match(
+                "/^" . AllSignsGeneral::SIGN_IDENTIFIER . AllSignsGeneral::ID_SEPARATOR . "[0-9]*/",
+                $firstLine
             ) !== 1
         ) {
             return null;
@@ -202,5 +204,4 @@ class AllSigns extends PluginBase
     {
         return $this->signStorage;
     }
-
 }

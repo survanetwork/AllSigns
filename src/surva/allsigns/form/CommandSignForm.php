@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AllSigns | create/edit command sign form
  */
@@ -13,7 +14,6 @@ use surva\allsigns\util\ExecutionContext;
 
 class CommandSignForm implements Form
 {
-
     private AllSigns $allSigns;
 
     private CommandSign $sign;
@@ -109,5 +109,4 @@ class CommandSignForm implements Form
           "content" => $this->content,
         ];
     }
-
 }

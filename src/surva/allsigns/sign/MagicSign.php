@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AllSigns | general AllSigns sign interface
  */
@@ -13,7 +14,6 @@ use surva\allsigns\util\AllSignsGeneral;
 
 abstract class MagicSign
 {
-
     protected AllSigns $allSigns;
 
     protected ?int $signId;
@@ -81,10 +81,10 @@ abstract class MagicSign
         $pos = $this->signBlock->getPosition();
 
         $this->signBlock = $this->signBlock->setText(
-          new SignText([
+            new SignText([
             AllSignsGeneral::SIGN_IDENTIFIER . AllSignsGeneral::ID_SEPARATOR . $this->signId,
             $text,
-          ])
+            ])
         );
         $pos->getWorld()->setBlock($pos, $this->signBlock);
 
@@ -150,5 +150,4 @@ abstract class MagicSign
     {
         return $this->data;
     }
-
 }

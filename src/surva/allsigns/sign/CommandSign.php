@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AllSigns | command sign class
  */
@@ -14,7 +15,6 @@ use surva\allsigns\util\SignType;
 
 class CommandSign extends MagicSign
 {
-
     /**
      * @inheritDoc
      */
@@ -100,5 +100,4 @@ class CommandSign extends MagicSign
 
         return $givenCommand;
     }
-
 }

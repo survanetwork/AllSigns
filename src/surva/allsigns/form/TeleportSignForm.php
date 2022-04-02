@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AllSigns | create/edit teleport sign form
  */
@@ -12,7 +13,6 @@ use surva\allsigns\sign\TeleportSign;
 
 class TeleportSignForm implements Form
 {
-
     private AllSigns $allSigns;
 
     private TeleportSign $sign;
@@ -121,5 +121,4 @@ class TeleportSignForm implements Form
           "content" => $this->content,
         ];
     }
-
 }

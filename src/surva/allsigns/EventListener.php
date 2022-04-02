@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AllSigns | EventListener
  */
@@ -16,7 +17,6 @@ use surva\allsigns\util\AllSignsGeneral;
 
 class EventListener implements Listener
 {
-
     private AllSigns $allSigns;
 
     public function __construct(AllSigns $allSigns)
@@ -37,7 +37,8 @@ class EventListener implements Listener
 
         $firstLine = strtolower($newText->getLine(0));
 
-        if ($firstLine === AllSignsGeneral::ID_SEPARATOR . "allsigns"
+        if (
+            $firstLine === AllSignsGeneral::ID_SEPARATOR . "allsigns"
             || $firstLine === AllSignsGeneral::ID_SEPARATOR . "as"
         ) {
             if (!$pl->hasPermission("allsigns.create")) {
@@ -114,5 +115,4 @@ class EventListener implements Listener
 
         $sign->remove();
     }
-
 }

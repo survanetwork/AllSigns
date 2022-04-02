@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AllSigns | select sign type form
  */
@@ -15,7 +16,6 @@ use surva\allsigns\util\SignType;
 
 class SelectTypeForm implements Form
 {
-
     private AllSigns $allSigns;
 
     private BaseSign $signBlock;
@@ -94,5 +94,4 @@ class SelectTypeForm implements Form
           "content" => $this->content,
         ];
     }
-
 }

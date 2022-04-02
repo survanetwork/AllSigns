@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AllSigns | teleport sign class
  */
@@ -12,7 +13,6 @@ use surva\allsigns\util\SignType;
 
 class TeleportSign extends MagicSign
 {
-
     /**
      * @inheritDoc
      */
@@ -85,5 +85,4 @@ class TeleportSign extends MagicSign
         $form = new TeleportSignForm($this->allSigns, $this);
         $player->sendForm($form);
     }
-
 }
