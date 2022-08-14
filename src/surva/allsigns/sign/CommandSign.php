@@ -9,6 +9,7 @@ namespace surva\allsigns\sign;
 use pocketmine\console\ConsoleCommandSender;
 use pocketmine\player\Player;
 use pocketmine\Server;
+use pocketmine\utils\AssumptionFailedError;
 use surva\allsigns\form\CommandSignForm;
 use surva\allsigns\util\ExecutionContext;
 use surva\allsigns\util\SignType;
@@ -47,7 +48,9 @@ class CommandSign extends MagicSign
      */
     public function createSign(array $signData, string $text, string $permission): bool
     {
-        if (($wld = $this->signBlock->getPosition()->getWorld()) === null) {
+        try {
+            $wld = $this->signBlock->getPosition()->getWorld();
+        } catch (AssumptionFailedError $e) {
             return false;
         }
 
@@ -90,9 +93,9 @@ class CommandSign extends MagicSign
     private function replaceVariables(string $givenCommand, Player $player): string
     {
         $givenCommand = str_replace("{player}", $player->getName(), $givenCommand);
-        $givenCommand = str_replace("{xc}", $player->getPosition()->getX(), $givenCommand);
-        $givenCommand = str_replace("{yc}", $player->getPosition()->getY(), $givenCommand);
-        $givenCommand = str_replace("{zc}", $player->getPosition()->getZ(), $givenCommand);
+        $givenCommand = str_replace("{xc}", (string) $player->getPosition()->getX(), $givenCommand);
+        $givenCommand = str_replace("{yc}", (string) $player->getPosition()->getY(), $givenCommand);
+        $givenCommand = str_replace("{zc}", (string) $player->getPosition()->getZ(), $givenCommand);
 
         if (($wld = $player->getWorld()) !== null) {
             $givenCommand = str_replace("{world}", $wld->getFolderName(), $givenCommand);

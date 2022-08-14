@@ -8,6 +8,7 @@ namespace surva\allsigns;
 
 use pocketmine\block\BaseSign;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\AssumptionFailedError;
 use pocketmine\utils\Config;
 use surva\allsigns\sign\CommandSign;
 use surva\allsigns\sign\MagicSign;
@@ -71,7 +72,9 @@ class AllSigns extends PluginBase
             return null;
         }
 
-        if (($world = $signBlock->getPosition()->getWorld()) === null) {
+        try {
+            $world = $signBlock->getPosition()->getWorld();
+        } catch (AssumptionFailedError $e) {
             return null;
         }
 

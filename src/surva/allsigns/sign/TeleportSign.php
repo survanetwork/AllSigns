@@ -7,6 +7,7 @@
 namespace surva\allsigns\sign;
 
 use pocketmine\player\Player;
+use pocketmine\utils\AssumptionFailedError;
 use pocketmine\world\Position;
 use surva\allsigns\form\TeleportSignForm;
 use surva\allsigns\util\SignType;
@@ -52,7 +53,9 @@ class TeleportSign extends MagicSign
      */
     public function createSign(array $signData, string $text, string $permission): bool
     {
-        if (($wld = $this->signBlock->getPosition()->getWorld()) === null) {
+        try {
+            $wld = $this->signBlock->getPosition()->getWorld();
+        } catch (AssumptionFailedError $e) {
             return false;
         }
 
