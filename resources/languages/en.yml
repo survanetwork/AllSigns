@@ -6,8 +6,6 @@
 #                      |___/
 # (C) 2021 by surva network | https://github.com/survanetwork
 
-# English language
-
 # Create/edit forms translation
 form:
   nopermission: "§cYou don't have the permission to create/edit signs!"
