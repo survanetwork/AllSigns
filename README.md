@@ -45,7 +45,8 @@
 [• License](#%EF%B8%8F-license)
 
 ## 📙 Description
-With AllSigns, you can easily create signs which are executing commands or teleporting players into another world when they tap on them.
+With AllSigns, you can easily create signs which are executing commands or teleporting players into another world/to coordinates when they tap on them.
+It provides an easy-to-use GUI to create the signs.
 
 ## 🎁 Features
 - **COMMAND SIGNS** Signs executing commands when players tap them
