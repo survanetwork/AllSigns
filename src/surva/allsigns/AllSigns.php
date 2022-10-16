@@ -6,7 +6,9 @@
 
 namespace surva\allsigns;
 
+use DirectoryIterator;
 use pocketmine\block\BaseSign;
+use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\AssumptionFailedError;
 use pocketmine\utils\Config;
@@ -15,6 +17,7 @@ use surva\allsigns\sign\MagicSign;
 use surva\allsigns\sign\TeleportSign;
 use surva\allsigns\util\AllSignsGeneral;
 use surva\allsigns\util\SignType;
+use surva\allsigns\utils\Messages;
 
 class AllSigns extends PluginBase
 {
@@ -22,9 +25,15 @@ class AllSigns extends PluginBase
 
     private array $signs;
 
+    /**
+     * @var \pocketmine\utils\Config default language config
+     */
     private Config $defaultMessages;
 
-    private Config $messages;
+    /**
+     * @var array available language configs
+     */
+    private array $translationMessages;
 
     /**
      * Plugin has been enabled, initial setup
@@ -42,9 +51,7 @@ class AllSigns extends PluginBase
         $this->signs = [];
 
         $this->defaultMessages = new Config($this->getFile() . "resources/languages/en.yml");
-        $this->messages        = new Config(
-            $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
-        );
+        $this->loadLanguageFiles();
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
     }
@@ -176,30 +183,67 @@ class AllSigns extends PluginBase
     }
 
     /**
-     * Get a translated message
+     * Shorthand to send a translated message to a command sender
      *
+     * @param  \pocketmine\command\CommandSender  $sender
      * @param  string  $key
      * @param  array  $replaces
      *
-     * @return string
+     * @return void
      */
-    public function getMessage(string $key, array $replaces = []): string
+    public function sendMessage(CommandSender $sender, string $key, array $replaces = []): void
     {
-        $rawMessage = $this->messages->getNested($key);
+        $messages = new Messages($this, $sender);
 
-        if ($rawMessage === null || $rawMessage === "") {
-            $rawMessage = $this->defaultMessages->getNested($key);
+        $sender->sendMessage($messages->getMessage($key, $replaces));
+    }
+
+    /**
+     * Load all available language files
+     *
+     * @return void
+     */
+    private function loadLanguageFiles(): void
+    {
+        $languageFilesDir = $this->getFile() . "resources/languages/";
+
+        foreach (new DirectoryIterator($languageFilesDir) as $dirObj) {
+            if (!($dirObj instanceof DirectoryIterator)) {
+                continue;
+            }
+
+            if (!$dirObj->isFile() || !str_ends_with($dirObj->getFilename(), ".yml")) {
+                continue;
+            }
+
+            preg_match("/^[a-z][a-z]/", $dirObj->getFilename(), $fileNameRes);
+
+            if (!isset($fileNameRes[0])) {
+                continue;
+            }
+
+            $langId = $fileNameRes[0];
+
+            $this->translationMessages[$langId] = new Config(
+                $this->getFile() . "resources/languages/" . $langId . ".yml"
+            );
         }
+    }
 
-        if ($rawMessage === null) {
-            return $key;
-        }
+    /**
+     * @return array
+     */
+    public function getTranslationMessages(): array
+    {
+        return $this->translationMessages;
+    }
 
-        foreach ($replaces as $replace => $value) {
-            $rawMessage = str_replace("{" . $replace . "}", $value, $rawMessage);
-        }
-
-        return $rawMessage;
+    /**
+     * @return \pocketmine\utils\Config
+     */
+    public function getDefaultMessages(): Config
+    {
+        return $this->defaultMessages;
     }
 
     /**

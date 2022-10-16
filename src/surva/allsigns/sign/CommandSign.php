@@ -13,6 +13,7 @@ use pocketmine\utils\AssumptionFailedError;
 use surva\allsigns\form\CommandSignForm;
 use surva\allsigns\util\ExecutionContext;
 use surva\allsigns\util\SignType;
+use surva\allsigns\utils\Messages;
 
 class CommandSign extends MagicSign
 {
@@ -26,7 +27,7 @@ class CommandSign extends MagicSign
         $context    = $this->data["settings"]["context"];
 
         if ($permission !== "" && !$player->hasPermission($permission)) {
-            $player->sendMessage($this->allSigns->getMessage("form.nousepermission"));
+            $this->allSigns->sendMessage($player, "form.nousepermission");
 
             return;
         }
@@ -78,7 +79,7 @@ class CommandSign extends MagicSign
      */
     public function sendCreateForm(Player $player, ?array $existingData = null): void
     {
-        $form = new CommandSignForm($this->allSigns, $this);
+        $form = new CommandSignForm($this, new Messages($this->allSigns, $player));
         $player->sendForm($form);
     }
 

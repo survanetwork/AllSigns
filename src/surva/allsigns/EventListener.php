@@ -14,6 +14,7 @@ use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\ItemIds;
 use surva\allsigns\form\SelectTypeForm;
 use surva\allsigns\util\AllSignsGeneral;
+use surva\allsigns\utils\Messages;
 
 class EventListener implements Listener
 {
@@ -41,13 +42,15 @@ class EventListener implements Listener
             $firstLine === AllSignsGeneral::ID_SEPARATOR . "allsigns"
             || $firstLine === AllSignsGeneral::ID_SEPARATOR . "as"
         ) {
+            $messages = new Messages($this->allSigns, $pl);
+
             if (!$pl->hasPermission("allsigns.create")) {
-                $pl->sendMessage($this->allSigns->getMessage("form.nopermission"));
+                $pl->sendMessage($messages->getMessage("form.nopermission"));
 
                 return;
             }
 
-            $selectTypeForm = new SelectTypeForm($this->allSigns, $signBlock);
+            $selectTypeForm = new SelectTypeForm($this->allSigns, $signBlock, $messages);
             $pl->sendForm($selectTypeForm);
         }
     }
@@ -75,12 +78,12 @@ class EventListener implements Listener
 
         if ($mode === AllSignsGeneral::EDIT_MODE) {
             if (!$pl->hasPermission("allsigns.create")) {
-                $pl->sendMessage($this->allSigns->getMessage("form.nopermission"));
+                $this->allSigns->sendMessage($pl, "form.nopermission");
 
                 return;
             }
         } elseif (!$pl->hasPermission("allsigns.use")) {
-            $pl->sendMessage($this->allSigns->getMessage("form.nousepermission"));
+            $this->allSigns->sendMessage($pl, "form.nousepermission");
 
             return;
         }
@@ -107,7 +110,7 @@ class EventListener implements Listener
         }
 
         if (!$pl->hasPermission("allsigns.create")) {
-            $pl->sendMessage($this->allSigns->getMessage("form.nopermission"));
+            $this->allSigns->sendMessage($pl, "form.nopermission");
 
             $ev->cancel();
             return;

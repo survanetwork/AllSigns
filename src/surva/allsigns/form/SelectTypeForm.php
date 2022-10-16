@@ -13,36 +13,35 @@ use surva\allsigns\AllSigns;
 use surva\allsigns\sign\CommandSign;
 use surva\allsigns\sign\TeleportSign;
 use surva\allsigns\util\SignType;
+use surva\allsigns\utils\Messages;
 
 class SelectTypeForm implements Form
 {
     private AllSigns $allSigns;
-
     private BaseSign $signBlock;
 
     private string $type = "custom_form";
-
     private string $title;
-
     private array $content;
 
     /**
      * @param  \surva\allsigns\AllSigns  $allSigns
      * @param  \pocketmine\block\BaseSign  $signBlock
+     * @param  \surva\allsigns\utils\Messages  $messages
      */
-    public function __construct(AllSigns $allSigns, BaseSign $signBlock)
+    public function __construct(AllSigns $allSigns, BaseSign $signBlock, Messages $messages)
     {
         $this->allSigns  = $allSigns;
         $this->signBlock = $signBlock;
 
-        $this->title   = $allSigns->getMessage("form.typeselect.title");
+        $this->title   = $messages->getMessage("form.typeselect.title");
         $this->content = [
           [
             "type"    => "dropdown",
-            "text"    => $allSigns->getMessage("form.typeselect.select"),
+            "text"    => $messages->getMessage("form.typeselect.select"),
             "options" => [
-              $allSigns->getMessage("signtypes.command"),
-              $allSigns->getMessage("signtypes.teleport"),
+              $messages->getMessage("signtypes.command"),
+              $messages->getMessage("signtypes.teleport"),
             ],
             "default" => SignType::COMMAND_SIGN,
           ],

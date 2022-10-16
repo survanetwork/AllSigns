@@ -11,6 +11,7 @@ use pocketmine\utils\AssumptionFailedError;
 use pocketmine\world\Position;
 use surva\allsigns\form\TeleportSignForm;
 use surva\allsigns\util\SignType;
+use surva\allsigns\utils\Messages;
 
 class TeleportSign extends MagicSign
 {
@@ -26,7 +27,7 @@ class TeleportSign extends MagicSign
         $z          = $this->data["settings"]["zc"];
 
         if ($permission !== "" && !$player->hasPermission($permission)) {
-            $player->sendMessage($this->allSigns->getMessage("form.nousepermission"));
+            $this->allSigns->sendMessage($player, "form.nousepermission");
 
             return;
         }
@@ -85,7 +86,7 @@ class TeleportSign extends MagicSign
      */
     public function sendCreateForm(Player $player, ?array $existingData = null): void
     {
-        $form = new TeleportSignForm($this->allSigns, $this);
+        $form = new TeleportSignForm($this, new Messages($this->allSigns, $player));
         $player->sendForm($form);
     }
 }
