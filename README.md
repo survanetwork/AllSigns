@@ -52,7 +52,7 @@ It provides an easy-to-use GUI to create the signs.
 - **USABILITY** Easy to use with in-game form windows, no need to use commands or edit config files
 
 ## 🖱 Usage
-Please see the [full documentation 📖](https://plugins.surva.net/docs/AllSigns) for a detailed description of all features.
+Please see the [full documentation 📖](https://plugin-docs.surva.net/allsigns) for a detailed description of all features.
 
 To create a new AllSign, place a sign and write `#as` into the first line. A form wizard will open where you can configure all settings for the sign.
 
@@ -70,12 +70,7 @@ To create a world sign which teleports a player to a specific world or coordinat
 
 To edit a sign, touch it with a golden pickaxe. If you want to remove a sign, just break it.
 
-[Read the full documentation 📖](https://plugins.surva.net/docs/AllSigns) • [Ask questions on Discord 💬](https://discord.gg/t4Kg4j3829)
-
-## 🚧 Upgrade from v1
-The second version of AllSigns is a complete rewrite of the plugin. Because of fundamental changes in the way how the plugin works, an upgrade from v1 is not supported, meaning all signs created in v1 need to be re-created.
-
-If you want to [upgrade to v2](https://plugins.surva.net/docs/AllSigns/#upgradev1), please delete all config files of the plugin first by deleting the plugin_data/AllSigns folder in the PocketMine directory. You can then just replace the PHAR-file of the plugin and start using v2.
+[Read the full documentation 📖](https://plugin-docs.surva.net/allsigns) • [Ask questions on Discord 💬](https://discord.gg/t4Kg4j3829)
 
 ## 🙋‍ Contribution
 Feel free to contribute if you have ideas or found an issue.
