@@ -4,7 +4,7 @@
  * AllSigns | translated messages utils
  */
 
-namespace surva\allsigns\utils;
+namespace surva\allsigns\util;
 
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
@@ -44,7 +44,7 @@ class Messages
 
         $defaultLangId = $this->allSigns->getConfig()->get("language", "en");
 
-        if ($prefLangId !== null) {
+        if ($prefLangId !== null && isset($this->allSigns->getTranslationMessages()[$prefLangId])) {
             $langConfig = $this->allSigns->getTranslationMessages()[$prefLangId];
         } else {
             $langConfig = $this->allSigns->getTranslationMessages()[$defaultLangId];

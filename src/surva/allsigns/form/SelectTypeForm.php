@@ -13,7 +13,7 @@ use surva\allsigns\AllSigns;
 use surva\allsigns\sign\CommandSign;
 use surva\allsigns\sign\TeleportSign;
 use surva\allsigns\util\SignType;
-use surva\allsigns\utils\Messages;
+use surva\allsigns\util\Messages;
 
 class SelectTypeForm implements Form
 {
@@ -27,7 +27,7 @@ class SelectTypeForm implements Form
     /**
      * @param  \surva\allsigns\AllSigns  $allSigns
      * @param  \pocketmine\block\BaseSign  $signBlock
-     * @param  \surva\allsigns\utils\Messages  $messages
+     * @param  \surva\allsigns\util\Messages  $messages
      */
     public function __construct(AllSigns $allSigns, BaseSign $signBlock, Messages $messages)
     {

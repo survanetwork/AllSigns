@@ -9,7 +9,7 @@ namespace surva\allsigns\form;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 use surva\allsigns\sign\TeleportSign;
-use surva\allsigns\utils\Messages;
+use surva\allsigns\util\Messages;
 
 class TeleportSignForm implements Form
 {
@@ -23,7 +23,7 @@ class TeleportSignForm implements Form
 
     /**
      * @param  \surva\allsigns\sign\TeleportSign  $teleportSign
-     * @param  \surva\allsigns\utils\Messages  $messages
+     * @param  \surva\allsigns\util\Messages  $messages
      */
     public function __construct(TeleportSign $teleportSign, Messages $messages)
     {

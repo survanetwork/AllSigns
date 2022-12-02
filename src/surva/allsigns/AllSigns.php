@@ -16,8 +16,8 @@ use surva\allsigns\sign\CommandSign;
 use surva\allsigns\sign\MagicSign;
 use surva\allsigns\sign\TeleportSign;
 use surva\allsigns\util\AllSignsGeneral;
+use surva\allsigns\util\Messages;
 use surva\allsigns\util\SignType;
-use surva\allsigns\utils\Messages;
 
 class AllSigns extends PluginBase
 {

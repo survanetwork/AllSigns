@@ -10,7 +10,7 @@ use pocketmine\form\Form;
 use pocketmine\player\Player;
 use surva\allsigns\sign\CommandSign;
 use surva\allsigns\util\ExecutionContext;
-use surva\allsigns\utils\Messages;
+use surva\allsigns\util\Messages;
 
 class CommandSignForm implements Form
 {
@@ -24,7 +24,7 @@ class CommandSignForm implements Form
 
     /**
      * @param  \surva\allsigns\sign\CommandSign  $commandSign
-     * @param  \surva\allsigns\utils\Messages  $messages
+     * @param  \surva\allsigns\util\Messages  $messages
      */
     public function __construct(CommandSign $commandSign, Messages $messages)
     {

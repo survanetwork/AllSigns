@@ -14,7 +14,7 @@ use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\ItemIds;
 use surva\allsigns\form\SelectTypeForm;
 use surva\allsigns\util\AllSignsGeneral;
-use surva\allsigns\utils\Messages;
+use surva\allsigns\util\Messages;
 
 class EventListener implements Listener
 {
