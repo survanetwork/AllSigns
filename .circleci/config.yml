@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 orbs:
   aws-s3: circleci/aws-s3@3.1.1
