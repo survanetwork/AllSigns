@@ -127,6 +127,7 @@ workflows:
             tags:
               only: /.*/
       - release-plugin:
+          context: os-plugins-deploy
           requires:
             - build-phar
           filters:
