@@ -109,7 +109,7 @@ jobs:
 
       # Update plugin info in CMS
       - run: |
-          curl --location --request PATCH "https://$CONTENT_URL/items/plugin_info/$PL_INFO_ID" \
+          curl --location --request PATCH "$CONTENT_URL/items/plugin_info/$PL_INFO_ID" \
             --header "Authorization: Bearer $CONTENT_TOKEN" \
             --header "Content-Type: application/json" \
             --data-raw "{\"version\": \"$CIRCLE_TAG\",\"download_url\": \"https://static.surva.net/osplugins/dl/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar\"}"
