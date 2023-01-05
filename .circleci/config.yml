@@ -1,7 +1,7 @@
 version: 2
 
 orbs:
-  aws-s3: circleci/aws-s3@3.0.0
+  aws-s3: circleci/aws-s3@3.1.1
 
 jobs:
   phpstan:
@@ -76,34 +76,29 @@ jobs:
       # Build PHAR with DevTools
       - run: php -d phar.readonly=0 DevTools/src/ConsoleScript.php --make plugin.yml,src --out build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_SHA1.phar
 
-      # Save built PHAR file
+      # Save built PHAR file to workspace for release job
+      - persist_to_workspace:
+          root: build-output
+          paths:
+            - build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_SHA1.phar
+
+      # Save built PHAR file as artifact
       - store_artifacts:
           path: build-output
   release-plugin:
     docker:
-      - image: cimg/php:8.0
+      - image: cimg/python:3.11-node
     steps:
-      # Checkout branch
-      - checkout
+      # Restore workspace with built PHAR file
+      - attach_workspace:
+          at: /tmp/build-output
 
-      # Install dependencies of PHP extensions
-      - run: sudo apt-get update && sudo apt-get install -y libyaml-dev
-
-      # Manually install PHP extensions
-      - run: sudo pecl install yaml
-
-      # Clone DevTools sources
-      - run: git clone https://github.com/pmmp/DevTools.git
-
-      # Create build output folder
-      - run: mkdir -p build-output
-
-      # Build PHAR with DevTools
-      - run: php -d phar.readonly=0 DevTools/src/ConsoleScript.php --make plugin.yml,src --out build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
+      # Rename PHAR file to release name
+      - run: cp /tmp/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_SHA1.phar /tmp/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
 
       # Upload files to AWS S3
       - aws-s3/copy:
-          from: build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
+          from: /tmp/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
           to: "s3://static.surva.net/osplugins/dl/"
 
       # Update plugin info in CMS
@@ -119,10 +114,15 @@ workflows:
     jobs:
       - phpstan
       - phpcs
-      - build-phar
+      - build-phar:
+          filters:
+            tags:
+              only: /.*/
   release:
     jobs:
       - release-plugin:
           filters:
             tags:
               only: /.*/
+            branches:
+              ignore: /.*/
