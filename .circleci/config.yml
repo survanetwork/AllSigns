@@ -76,11 +76,17 @@ jobs:
       # Build PHAR with DevTools
       - run: php -d phar.readonly=0 DevTools/src/ConsoleScript.php --make plugin.yml,src --out build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_SHA1.phar
 
-      # Save built PHAR file to workspace for release job
+      # Create workspace folder
+      - run: mkdir -p workspace
+
+      # Copy build output folder into workspace
+      - run: cp -r build-output workspace/
+
+      # Save workspace with built PHAR file for release job
       - persist_to_workspace:
-          root: build-output
+          root: workspace
           paths:
-            - $CIRCLE_PROJECT_REPONAME$CIRCLE_SHA1.phar
+            - build-output
 
       # Save built PHAR file as artifact
       - store_artifacts:
@@ -91,14 +97,14 @@ jobs:
     steps:
       # Restore workspace with built PHAR file
       - attach_workspace:
-          at: /tmp/build-output
+          at: /tmp/workspace
 
       # Rename PHAR file to release name
-      - run: cp /tmp/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_SHA1.phar /tmp/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
+      - run: cp /tmp/workspace/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_SHA1.phar /tmp/workspace/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
 
       # Upload files to AWS S3
       - aws-s3/copy:
-          from: /tmp/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
+          from: /tmp/workspace/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
           to: "s3://static.surva.net/osplugins/dl/"
 
       # Update plugin info in CMS
