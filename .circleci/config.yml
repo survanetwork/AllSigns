@@ -1,5 +1,8 @@
 version: 2
 
+orbs:
+  aws-s3: circleci/aws-s3@3.0.0
+
 jobs:
   phpstan:
     docker:
@@ -76,6 +79,39 @@ jobs:
       # Save built PHAR file
       - store_artifacts:
           path: build-output
+  release-plugin:
+    docker:
+      - image: cimg/php:8.0
+    steps:
+      # Checkout branch
+      - checkout
+
+      # Install dependencies of PHP extensions
+      - run: sudo apt-get update && sudo apt-get install -y libyaml-dev
+
+      # Manually install PHP extensions
+      - run: sudo pecl install yaml
+
+      # Clone DevTools sources
+      - run: git clone https://github.com/pmmp/DevTools.git
+
+      # Create build output folder
+      - run: mkdir -p build-output
+
+      # Build PHAR with DevTools
+      - run: php -d phar.readonly=0 DevTools/src/ConsoleScript.php --make plugin.yml,src --out build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
+
+      # Upload files to AWS S3
+      - aws-s3/copy:
+          from: build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
+          to: "s3://static.surva.net/osplugins/dl/"
+
+      # Update plugin info in CMS
+      - run: |
+          curl --location --request PATCH 'https://$CONTENT_URL/items/plugin_info/$PL_INFO_ID' \
+            --header 'Authorization: Bearer $CONTENT_TOKEN' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{"version": "$CIRCLE_TAG","download_url": "https://static.surva.net/osplugins/dl/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar"}'
 
 workflows:
   version: 2
@@ -84,3 +120,9 @@ workflows:
       - phpstan
       - phpcs
       - build-phar
+  release:
+    jobs:
+      - release-plugin:
+          filters:
+            tags:
+              only: /.*/
