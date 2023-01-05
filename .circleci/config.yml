@@ -80,7 +80,7 @@ jobs:
       - persist_to_workspace:
           root: build-output
           paths:
-            - build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_SHA1.phar
+            - $CIRCLE_PROJECT_REPONAME$CIRCLE_SHA1.phar
 
       # Save built PHAR file as artifact
       - store_artifacts:
