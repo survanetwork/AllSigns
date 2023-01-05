@@ -127,6 +127,8 @@ workflows:
   release:
     jobs:
       - release-plugin:
+          requires:
+            - build-phar
           filters:
             tags:
               only: /.*/
