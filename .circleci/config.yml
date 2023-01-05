@@ -120,12 +120,12 @@ workflows:
     jobs:
       - phpstan
       - phpcs
+  deploy:
+    jobs:
       - build-phar:
           filters:
             tags:
               only: /.*/
-  release:
-    jobs:
       - release-plugin:
           requires:
             - build-phar
