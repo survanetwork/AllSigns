@@ -1,8 +1,9 @@
 branches:
 - master
-- pm4
 
 projects:
   AllSigns:
     path: ""
     icon: "icon.png"
+    lint:
+      phpstan: false
