@@ -11,7 +11,7 @@ use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\SignChangeEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\item\ItemIds;
+use pocketmine\item\VanillaItems;
 use surva\allsigns\form\SelectTypeForm;
 use surva\allsigns\util\AllSignsGeneral;
 use surva\allsigns\util\Messages;
@@ -74,7 +74,9 @@ class EventListener implements Listener
             return;
         }
 
-        $mode = $item->getId() === ItemIds::GOLD_PICKAXE ? AllSignsGeneral::EDIT_MODE : AllSignsGeneral::INTERACT_MODE;
+        $mode = $item->getTypeId() === VanillaItems::GOLDEN_PICKAXE()->getTypeId()
+          ? AllSignsGeneral::EDIT_MODE
+          : AllSignsGeneral::INTERACT_MODE;
 
         if ($mode === AllSignsGeneral::EDIT_MODE) {
             if (!$pl->hasPermission("allsigns.create")) {
