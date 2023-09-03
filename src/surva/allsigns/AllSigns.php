@@ -18,6 +18,7 @@ use surva\allsigns\sign\TeleportSign;
 use surva\allsigns\util\AllSignsGeneral;
 use surva\allsigns\util\Messages;
 use surva\allsigns\util\SignType;
+use Symfony\Component\Filesystem\Path;
 
 class AllSigns extends PluginBase
 {
@@ -42,7 +43,7 @@ class AllSigns extends PluginBase
     {
         $this->saveDefaultConfig();
 
-        $this->signStorage = new Config($this->getDataFolder() . "signs.yml");
+        $this->signStorage = new Config(Path::join($this->getDataFolder(), "signs.yml"));
 
         if (!$this->signStorage->exists("signs")) {
             $this->signStorage->set("signs", []);
@@ -50,7 +51,8 @@ class AllSigns extends PluginBase
 
         $this->signs = [];
 
-        $this->defaultMessages = new Config($this->getFile() . "resources/languages/en.yml");
+        $this->saveResource(Path::join("languages", "en.yml"), true);
+        $this->defaultMessages = new Config(Path::join($this->getDataFolder(), "languages", "en.yml"));
         $this->loadLanguageFiles();
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
@@ -205,18 +207,14 @@ class AllSigns extends PluginBase
      */
     private function loadLanguageFiles(): void
     {
-        $languageFilesDir = $this->getFile() . "resources/languages/";
+        $resources = $this->getResources();
 
-        foreach (new DirectoryIterator($languageFilesDir) as $dirObj) {
-            if (!($dirObj instanceof DirectoryIterator)) {
+        foreach ($resources as $resource) {
+            if (!preg_match("/languages\/[a-z]{2}.yml$/", $resource->getPathname())) {
                 continue;
             }
 
-            if (!$dirObj->isFile() || !str_ends_with($dirObj->getFilename(), ".yml")) {
-                continue;
-            }
-
-            preg_match("/^[a-z][a-z]/", $dirObj->getFilename(), $fileNameRes);
+            preg_match("/^[a-z][a-z]/", $resource->getFilename(), $fileNameRes);
 
             if (!isset($fileNameRes[0])) {
                 continue;
@@ -224,8 +222,9 @@ class AllSigns extends PluginBase
 
             $langId = $fileNameRes[0];
 
+            $this->saveResource(Path::join("languages", $langId . ".yml"), true);
             $this->translationMessages[$langId] = new Config(
-                $this->getFile() . "resources/languages/" . $langId . ".yml"
+                Path::join($this->getDataFolder(), "languages", $langId . ".yml")
             );
         }
     }
