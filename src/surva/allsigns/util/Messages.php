@@ -44,10 +44,11 @@ class Messages
 
         $defaultLangId = $this->allSigns->getConfig()->get("language", "en");
 
-        if ($prefLangId !== null && isset($this->allSigns->getTranslationMessages()[$prefLangId])) {
-            $langConfig = $this->allSigns->getTranslationMessages()[$prefLangId];
+        $tm = $this->allSigns->getTranslationMessages();
+        if ($prefLangId !== null && isset($tm[$prefLangId])) {
+            $langConfig = $tm[$prefLangId];
         } else {
-            $langConfig = $this->allSigns->getTranslationMessages()[$defaultLangId];
+            $langConfig = $tm[$defaultLangId];
         }
 
         $rawMessage = $langConfig->getNested($key);
