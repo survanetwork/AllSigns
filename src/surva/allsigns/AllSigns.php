@@ -24,6 +24,9 @@ class AllSigns extends PluginBase
 {
     private Config $signStorage;
 
+    /**
+     * @var MagicSign[] MagicSign objects
+     */
     private array $signs;
 
     /**
@@ -32,7 +35,7 @@ class AllSigns extends PluginBase
     private Config $defaultMessages;
 
     /**
-     * @var array available language configs
+     * @var Config[] available language configs
      */
     private array $translationMessages;
 
@@ -179,7 +182,7 @@ class AllSigns extends PluginBase
             return 0;
         }
 
-        $highestId = max(array_keys($signs));
+        $highestId = (int) max(array_keys($signs));
 
         return $highestId + 1;
     }
@@ -189,7 +192,7 @@ class AllSigns extends PluginBase
      *
      * @param  \pocketmine\command\CommandSender  $sender
      * @param  string  $key
-     * @param  array  $replaces
+     * @param  string[]  $replaces
      *
      * @return void
      */
@@ -232,7 +235,7 @@ class AllSigns extends PluginBase
     }
 
     /**
-     * @return array
+     * @return Config[]
      */
     public function getTranslationMessages(): array
     {
