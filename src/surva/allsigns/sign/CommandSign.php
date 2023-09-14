@@ -22,6 +22,10 @@ class CommandSign extends MagicSign
      */
     protected function internallyHandleSignInteraction(Player $player): void
     {
+        if ($this->data === null) {
+            return;
+        }
+
         $permission = $this->data["settings"]["permission"];
         $command    = $this->data["settings"]["command"];
         $context    = $this->data["settings"]["context"];

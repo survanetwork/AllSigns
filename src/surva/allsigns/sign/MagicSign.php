@@ -20,12 +20,17 @@ abstract class MagicSign
 
     protected BaseSign $signBlock;
 
+    /**
+     * @phpstan-ignore-next-line
+     * @var array|null sign config data
+     */
     protected ?array $data;
 
     /**
      * @param  \surva\allsigns\AllSigns  $allSigns
      * @param  \pocketmine\block\BaseSign  $signBlock
      * @param  int|null  $signId
+     * @phpstan-ignore-next-line
      * @param  array|null  $data
      */
     public function __construct(AllSigns $allSigns, BaseSign $signBlock, ?int $signId = null, ?array $data = null)
@@ -111,7 +116,7 @@ abstract class MagicSign
     /**
      * Create a new sign
      *
-     * @param  array  $signData
+     * @param  string[]  $signData
      * @param  string  $text
      * @param  string  $permission
      *
@@ -123,7 +128,7 @@ abstract class MagicSign
      * Send the creation form to the player
      *
      * @param  \pocketmine\player\Player  $player
-     * @param  array|null  $existingData
+     * @param  string[]|null  $existingData
      */
     abstract public function sendCreateForm(Player $player, ?array $existingData = null): void;
 
@@ -144,6 +149,7 @@ abstract class MagicSign
     }
 
     /**
+     * @phpstan-ignore-next-line
      * @return array|null
      */
     public function getData(): ?array

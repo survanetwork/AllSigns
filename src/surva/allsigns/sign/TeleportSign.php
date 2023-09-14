@@ -20,6 +20,10 @@ class TeleportSign extends MagicSign
      */
     protected function internallyHandleSignInteraction(Player $player): void
     {
+        if ($this->data === null) {
+            return;
+        }
+
         $permission = $this->data["settings"]["permission"];
         $worldName  = $this->data["settings"]["world"];
         $x          = $this->data["settings"]["xc"];

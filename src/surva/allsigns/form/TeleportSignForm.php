@@ -17,6 +17,11 @@ class TeleportSignForm implements Form
 
     private string $type = "custom_form";
     private string $title;
+
+    /**
+     * @phpstan-ignore-next-line
+     * @var array[]
+     */
     private array $content;
 
     private Messages $messages;
@@ -109,6 +114,7 @@ class TeleportSignForm implements Form
     /**
      * Return JSON data of the form
      *
+     * @phpstan-ignore-next-line
      * @return array
      */
     public function jsonSerialize(): array
