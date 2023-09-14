@@ -23,24 +23,23 @@
     <a href="https://discord.gg/t4Kg4j3829">
         <img src="https://img.shields.io/discord/685532530451283997?color=blueviolet" alt="Discord">
     </a>
-    <a href="https://twitter.com/survanetwork">
-        <img src="https://img.shields.io/twitter/follow/survanetwork?style=social" alt="Twitter">
+    <a href="https://plugins.surva.net">
+        <img src="https://img.shields.io/badge/website-visit-ee8031" alt="Website">
     </a>
 </p>
 
 ##
 
 <p align="center">
-    <img src=".github/.media/feature-banner.png" width="650" height="365" alt="AllSigns plugin features">
+    <a href="https://plugins.surva.net/#allsigns">
+        <img src="https://static.surva.net/osplugins/assets/dl-buttons/allsigns.png" width="220" height="auto" alt="Download AllSigns plugin release">
+        <img src="https://static.surva.net/osplugins/assets/feature-banners/allsigns.png" width="650" height="auto" alt="AllSigns plugin features">
+    </a>
 </p>
 
-[• Description](#-description)  
-[• Features](#-features)  
-[• Usage](#-usage)  
-[• Command Signs](#%EF%B8%8F-command-signs)  
-[• Teleport Signs](#-teleport-signs)  
-[• Contribution](#-contribution)  
-[• License](#%EF%B8%8F-license)
+[Description](#-description) | [Features](#-features) | [Usage](#-usage)
+| [Command Signs](#%EF%B8%8F-command-signs) | [Teleport Signs](#-teleport-signs) | [Contribution](#-contribution)
+| [License](#%EF%B8%8F-license)
 
 ## 📙 Description
 With AllSigns, you can easily create signs which are executing commands or teleporting players into another world/to coordinates when they tap on them.
@@ -56,17 +55,17 @@ Please see the [full documentation 📖](https://plugin-docs.surva.net/allsigns)
 
 To create a new AllSign, place a sign and write `#as` into the first line. A form wizard will open where you can configure all settings for the sign.
 
-![](.github/.media/create-new-sign.png)
+![Create new sign form](https://static.surva.net/osplugins/allsigns/create-new-sign.png)
 
 ### ⌨️ Command Signs
 To create a command sign which executes a specific command when a player touches it, just create a sign like described above.
 
-![](.github/.media/command-sign.png)
+![Command sign settings form](https://static.surva.net/osplugins/allsigns/command-sign.png)
 
 ### 🌎 Teleport Signs
 To create a world sign which teleports a player to a specific world or coordinates, create a sign like described above.
 
-![](.github/.media/teleport-sign.png)
+![Teleport sign settings form](https://static.surva.net/osplugins/allsigns/teleport-sign.png)
 
 To edit a sign, touch it with a golden pickaxe. If you want to remove a sign, just break it.
 
