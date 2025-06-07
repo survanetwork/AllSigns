@@ -20,8 +20,7 @@ class CommandSignForm implements Form
     private string $title;
 
     /**
-     * @phpstan-ignore-next-line
-     * @var array[]
+     * @var mixed[]
      */
     private array $content;
 
@@ -102,8 +101,7 @@ class CommandSignForm implements Form
     /**
      * Return JSON data of the form
      *
-     * @phpstan-ignore-next-line
-     * @return array
+     * @return array<string, mixed>
      */
     public function jsonSerialize(): array
     {

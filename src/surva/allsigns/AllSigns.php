@@ -182,6 +182,7 @@ class AllSigns extends PluginBase
             return 0;
         }
 
+        // @phpstan-ignore argument.type
         $highestId = (int) max(array_keys($signs));
 
         return $highestId + 1;

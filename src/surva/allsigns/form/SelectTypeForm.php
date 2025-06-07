@@ -24,8 +24,7 @@ class SelectTypeForm implements Form
     private string $title;
 
     /**
-     * @phpstan-ignore-next-line
-     * @var array[]
+     * @var mixed[]
      */
     private array $content;
 
@@ -88,8 +87,7 @@ class SelectTypeForm implements Form
     /**
      * Return JSON data of the form
      *
-     * @phpstan-ignore-next-line
-     * @return array
+     * @return array<string, mixed>
      */
     public function jsonSerialize(): array
     {

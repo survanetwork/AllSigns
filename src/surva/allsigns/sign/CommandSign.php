@@ -101,11 +101,6 @@ class CommandSign extends MagicSign
         $givenCommand = str_replace("{xc}", (string) $player->getPosition()->getX(), $givenCommand);
         $givenCommand = str_replace("{yc}", (string) $player->getPosition()->getY(), $givenCommand);
         $givenCommand = str_replace("{zc}", (string) $player->getPosition()->getZ(), $givenCommand);
-
-        if (($wld = $player->getWorld()) !== null) {
-            $givenCommand = str_replace("{world}", $wld->getFolderName(), $givenCommand);
-        }
-
-        return $givenCommand;
+        return str_replace("{world}", $player->getWorld()->getFolderName(), $givenCommand);
     }
 }

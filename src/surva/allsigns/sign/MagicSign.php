@@ -21,8 +21,7 @@ abstract class MagicSign
     protected BaseSign $signBlock;
 
     /**
-     * @phpstan-ignore-next-line
-     * @var array|null sign config data
+     * @var mixed[]|null sign config data
      */
     protected ?array $data;
 
@@ -30,8 +29,7 @@ abstract class MagicSign
      * @param  \surva\allsigns\AllSigns  $allSigns
      * @param  \pocketmine\block\BaseSign  $signBlock
      * @param  int|null  $signId
-     * @phpstan-ignore-next-line
-     * @param  array|null  $data
+     * @param  mixed[]|null  $data
      */
     public function __construct(AllSigns $allSigns, BaseSign $signBlock, ?int $signId = null, ?array $data = null)
     {
@@ -78,10 +76,6 @@ abstract class MagicSign
         $this->allSigns->getSignStorage()->setNested("signs." . $this->signId, $this->data);
 
         $this->allSigns->getSignStorage()->save();
-
-        if (!($this->signBlock instanceof BaseSign)) {
-            return false;
-        }
 
         $pos = $this->signBlock->getPosition();
 
@@ -149,8 +143,7 @@ abstract class MagicSign
     }
 
     /**
-     * @phpstan-ignore-next-line
-     * @return array|null
+     * @return mixed[]|null
      */
     public function getData(): ?array
     {

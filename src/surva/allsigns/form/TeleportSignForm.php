@@ -19,8 +19,7 @@ class TeleportSignForm implements Form
     private string $title;
 
     /**
-     * @phpstan-ignore-next-line
-     * @var array[]
+     * @var mixed[]
      */
     private array $content;
 
@@ -37,11 +36,8 @@ class TeleportSignForm implements Form
 
         $existingData = $this->sign->getData();
 
-        $defaultWorld = "world";
-
-        if (($wld = $this->sign->getSignBlock()->getPosition()->getWorld()) !== null) {
-            $defaultWorld = $wld->getFolderName();
-        }
+        $wld = $this->sign->getSignBlock()->getPosition()->getWorld();
+        $defaultWorld = $wld->getFolderName();
 
         $this->title   = $messages->getMessage("form.teleportsign.title");
         $this->content = [
@@ -114,8 +110,7 @@ class TeleportSignForm implements Form
     /**
      * Return JSON data of the form
      *
-     * @phpstan-ignore-next-line
-     * @return array
+     * @return array<string, mixed>
      */
     public function jsonSerialize(): array
     {
