@@ -5,7 +5,7 @@ api: 5.0.0
 
 author: survanetwork
 description: Turn signs into world teleport and command signs
-website: https://plugins.surva.net/#allsigns
+website: https://dev.surva.net/plugins/#allsigns
 
 permissions:
   allsigns.create:
