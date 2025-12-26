@@ -12,8 +12,8 @@ use pocketmine\Server;
 use pocketmine\utils\AssumptionFailedError;
 use surva\allsigns\form\CommandSignForm;
 use surva\allsigns\util\ExecutionContext;
-use surva\allsigns\util\SignType;
 use surva\allsigns\util\Messages;
+use surva\allsigns\util\SignType;
 
 class CommandSign extends MagicSign
 {

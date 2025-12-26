@@ -6,7 +6,6 @@
 
 namespace surva\allsigns;
 
-use DirectoryIterator;
 use pocketmine\block\BaseSign;
 use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;

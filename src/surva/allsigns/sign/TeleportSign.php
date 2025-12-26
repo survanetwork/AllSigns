@@ -10,8 +10,8 @@ use pocketmine\player\Player;
 use pocketmine\utils\AssumptionFailedError;
 use pocketmine\world\Position;
 use surva\allsigns\form\TeleportSignForm;
-use surva\allsigns\util\SignType;
 use surva\allsigns\util\Messages;
+use surva\allsigns\util\SignType;
 
 class TeleportSign extends MagicSign
 {

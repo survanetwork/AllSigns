@@ -12,8 +12,8 @@ use pocketmine\player\Player;
 use surva\allsigns\AllSigns;
 use surva\allsigns\sign\CommandSign;
 use surva\allsigns\sign\TeleportSign;
-use surva\allsigns\util\SignType;
 use surva\allsigns\util\Messages;
+use surva\allsigns\util\SignType;
 
 class SelectTypeForm implements Form
 {
