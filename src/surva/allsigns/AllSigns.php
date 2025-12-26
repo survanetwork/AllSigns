@@ -109,12 +109,13 @@ class AllSigns extends PluginBase
      *
      * @param int $id
      * @param BaseSign $signBlock
+     * @param bool $reload
      *
      * @return MagicSign|null
      */
-    private function loadMagicSign(int $id, BaseSign $signBlock): ?MagicSign
+    public function loadMagicSign(int $id, BaseSign $signBlock, bool $reload = false): ?MagicSign
     {
-        if (isset($this->signs[$id])) {
+        if (isset($this->signs[$id]) && !$reload) {
             return $this->signs[$id];
         }
 

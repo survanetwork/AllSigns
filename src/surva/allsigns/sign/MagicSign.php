@@ -92,6 +92,8 @@ abstract class MagicSign
         );
         $pos->getWorld()->setBlock($pos, $this->signBlock);
 
+        $this->allSigns->loadMagicSign($this->signId, $this->signBlock, true);
+
         return true;
     }
 
