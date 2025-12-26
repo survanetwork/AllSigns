@@ -20,10 +20,16 @@ abstract class MagicSign
     protected ?int $signId;
     protected BaseSign $signBlock;
     /**
-     * @var array|null sign config data
+     * @var array<string, mixed>|null sign config data
      */
     protected ?array $data;
 
+    /**
+     * @param AllSigns $allSigns
+     * @param BaseSign $signBlock
+     * @param int|null $signId
+     * @param array<string, mixed>|null $data
+     */
     public function __construct(AllSigns $allSigns, BaseSign $signBlock, ?int $signId = null, ?array $data = null)
     {
         $this->allSigns = $allSigns;
@@ -118,7 +124,7 @@ abstract class MagicSign
     /**
      * Create a new sign
      *
-     * @param array $signData
+     * @param array<string, string> $signData
      * @param string $text
      * @param string $permission
      *
@@ -153,7 +159,7 @@ abstract class MagicSign
     }
 
     /**
-     * @return array|null
+     * @return array<string, mixed>|null
      */
     public function getData(): ?array
     {

@@ -18,6 +18,9 @@ class TeleportSignForm implements Form
 
     private string $type = "custom_form";
     private string $title;
+    /**
+     * @var array<string, mixed>[]
+     */
     private array $content;
 
     public function __construct(TeleportSign $teleportSign, Messages $messages)

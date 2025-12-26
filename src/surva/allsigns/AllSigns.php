@@ -192,7 +192,7 @@ class AllSigns extends PluginBase
      *
      * @param CommandSender $sender
      * @param string $key
-     * @param array $replaces
+     * @param array<string, string> $replaces
      *
      * @return void
      */

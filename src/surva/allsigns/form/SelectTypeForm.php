@@ -22,6 +22,9 @@ class SelectTypeForm implements Form
 
     private string $type = "custom_form";
     private string $title;
+    /**
+     * @var array<string, mixed>[]
+     */
     private array $content;
 
     public function __construct(AllSigns $allSigns, BaseSign $signBlock, Messages $messages)
