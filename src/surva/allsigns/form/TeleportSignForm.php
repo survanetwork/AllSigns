@@ -86,9 +86,9 @@ class TeleportSignForm implements Form
 
         $signData = [
           "world" => $data[0],
-          "xc"    => $data[1],
-          "yc"    => $data[2],
-          "zc"    => $data[3],
+          "xc" => $data[1],
+          "yc" => $data[2],
+          "zc" => $data[3],
         ];
 
         $text = $data[4];
@@ -109,8 +109,8 @@ class TeleportSignForm implements Form
     public function jsonSerialize(): array
     {
         return [
-          "type"    => $this->type,
-          "title"   => $this->title,
+          "type" => $this->type,
+          "title" => $this->title,
           "content" => $this->content,
         ];
     }

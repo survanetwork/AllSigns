@@ -36,9 +36,9 @@ class EventListener implements Listener
      */
     public function onSignChange(SignChangeEvent $ev): void
     {
-        $pl        = $ev->getPlayer();
+        $pl = $ev->getPlayer();
         $signBlock = $ev->getSign();
-        $newText   = $ev->getNewText();
+        $newText = $ev->getNewText();
 
         $firstLine = strtolower($newText->getLine(0));
 
@@ -70,8 +70,8 @@ class EventListener implements Listener
      */
     public function onPlayerInteract(PlayerInteractEvent $ev): void
     {
-        $pl    = $ev->getPlayer();
-        $item  = $ev->getItem();
+        $pl = $ev->getPlayer();
+        $item = $ev->getItem();
         $block = $ev->getBlock();
 
         if (!($block instanceof BaseSign)) {
@@ -111,7 +111,7 @@ class EventListener implements Listener
      */
     public function onBlockBreak(BlockBreakEvent $ev): void
     {
-        $pl    = $ev->getPlayer();
+        $pl = $ev->getPlayer();
         $block = $ev->getBlock();
 
         if (!($block instanceof BaseSign)) {

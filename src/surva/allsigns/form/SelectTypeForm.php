@@ -86,8 +86,8 @@ class SelectTypeForm implements Form
     public function jsonSerialize(): array
     {
         return [
-          "type"    => $this->type,
-          "title"   => $this->title,
+          "type" => $this->type,
+          "title" => $this->title,
           "content" => $this->content,
         ];
     }
