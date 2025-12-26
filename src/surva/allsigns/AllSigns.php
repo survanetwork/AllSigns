@@ -1,7 +1,8 @@
 <?php
 
 /**
- * AllSigns | plugin main class
+ * AllSigns | plugin main class, management
+ * of magic signs and translations
  */
 
 namespace surva\allsigns;
@@ -22,29 +23,27 @@ use Symfony\Component\Filesystem\Path;
 class AllSigns extends PluginBase
 {
     private Config $signStorage;
-
     /**
      * @var MagicSign[] MagicSign objects
      */
     private array $signs;
-
     /**
-     * @var \pocketmine\utils\Config default language config
+     * @var Config default language config
      */
     private Config $defaultMessages;
-
     /**
      * @var Config[] available language configs
      */
     private array $translationMessages;
 
     /**
-     * Plugin has been enabled, initial setup
+     * Initial setup, load sign storage config, language files and
+     * register events
+     *
+     * @return void
      */
     public function onEnable(): void
     {
-        $this->saveDefaultConfig();
-
         $this->signStorage = new Config(Path::join($this->getDataFolder(), "signs.yml"));
 
         if (!$this->signStorage->exists("signs")) {
@@ -61,11 +60,11 @@ class AllSigns extends PluginBase
     }
 
     /**
-     * Get a MagicSign object using the associated block
+     * Get a MagicSign using the sign block
      *
-     * @param  \pocketmine\block\BaseSign  $signBlock
+     * @param BaseSign $signBlock
      *
-     * @return \surva\allsigns\sign\MagicSign|null
+     * @return MagicSign|null
      */
     public function getMagicSignByBlock(BaseSign $signBlock): ?MagicSign
     {
@@ -106,11 +105,12 @@ class AllSigns extends PluginBase
 
     /**
      * Get a sign from the sign object array or load from config
+     * if not loaded yet
      *
-     * @param  int  $id
-     * @param  \pocketmine\block\BaseSign  $signBlock
+     * @param int $id
+     * @param BaseSign $signBlock
      *
-     * @return \surva\allsigns\sign\MagicSign|null
+     * @return MagicSign|null
      */
     private function loadMagicSign(int $id, BaseSign $signBlock): ?MagicSign
     {
@@ -140,9 +140,9 @@ class AllSigns extends PluginBase
     }
 
     /**
-     * Check if a sign is a magic sign
+     * Check if a sign block is a MagicSign
      *
-     * @param  \pocketmine\block\BaseSign  $signBlock
+     * @param BaseSign $signBlock
      *
      * @return string|null
      */
@@ -169,7 +169,7 @@ class AllSigns extends PluginBase
     }
 
     /**
-     * Get the next free sign ID
+     * Get the next available sign ID
      *
      * @return int
      */
@@ -190,9 +190,9 @@ class AllSigns extends PluginBase
     /**
      * Shorthand to send a translated message to a command sender
      *
-     * @param  \pocketmine\command\CommandSender  $sender
-     * @param  string  $key
-     * @param  string[]  $replaces
+     * @param CommandSender $sender
+     * @param string $key
+     * @param array $replaces
      *
      * @return void
      */
@@ -243,7 +243,7 @@ class AllSigns extends PluginBase
     }
 
     /**
-     * @return \pocketmine\utils\Config
+     * @return Config
      */
     public function getDefaultMessages(): Config
     {
@@ -251,7 +251,7 @@ class AllSigns extends PluginBase
     }
 
     /**
-     * @return \pocketmine\utils\Config
+     * @return Config
      */
     public function getSignStorage(): Config
     {

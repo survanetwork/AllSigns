@@ -6,6 +6,7 @@
 
 namespace surva\allsigns\sign;
 
+use Exception;
 use pocketmine\block\BaseSign;
 use pocketmine\block\utils\SignText;
 use pocketmine\player\Player;
@@ -17,33 +18,27 @@ abstract class MagicSign
     protected AllSigns $allSigns;
 
     protected ?int $signId;
-
     protected BaseSign $signBlock;
-
     /**
-     * @var mixed[]|null sign config data
+     * @var array|null sign config data
      */
     protected ?array $data;
 
-    /**
-     * @param  \surva\allsigns\AllSigns  $allSigns
-     * @param  \pocketmine\block\BaseSign  $signBlock
-     * @param  int|null  $signId
-     * @param  mixed[]|null  $data
-     */
     public function __construct(AllSigns $allSigns, BaseSign $signBlock, ?int $signId = null, ?array $data = null)
     {
-        $this->allSigns  = $allSigns;
+        $this->allSigns = $allSigns;
         $this->signBlock = $signBlock;
-        $this->signId    = $signId;
-        $this->data      = $data;
+        $this->signId = $signId;
+        $this->data = $data;
     }
 
     /**
-     * Handle if a player interacts with a sign
+     * Handle player interaction with this sign
      *
-     * @param  \pocketmine\player\Player  $player
-     * @param  int  $mode
+     * @param Player $player
+     * @param int $mode
+     *
+     * @return void
      */
     public function handleSignInteraction(Player $player, int $mode = AllSignsGeneral::INTERACT_MODE): void
     {
@@ -63,7 +58,7 @@ abstract class MagicSign
     /**
      * Save to config and update sign block
      *
-     * @param  string  $text
+     * @param string $text
      *
      * @return bool
      */
@@ -75,7 +70,11 @@ abstract class MagicSign
 
         $this->allSigns->getSignStorage()->setNested("signs." . $this->signId, $this->data);
 
-        $this->allSigns->getSignStorage()->save();
+        try {
+            $this->allSigns->getSignStorage()->save();
+        } catch (Exception) {
+            $this->allSigns->getLogger()->error("Could not save sign storage config");
+        }
 
         $pos = $this->signBlock->getPosition();
 
@@ -92,37 +91,48 @@ abstract class MagicSign
 
     /**
      * Remove a broken sign from config
+     *
+     * @return void
      */
     public function remove(): void
     {
         $this->allSigns->getSignStorage()->removeNested("signs." . $this->signId);
 
-        $this->allSigns->getSignStorage()->save();
+        try {
+            $this->allSigns->getSignStorage()->save();
+        } catch (Exception) {
+            $this->allSigns->getLogger()->error("Could not save sign storage config");
+        }
     }
 
     /**
-     * Handle if a player interacts with a sign
+     * Internal logic to execute when a player interacted
+     * with this sign
      *
-     * @param  \pocketmine\player\Player  $player
+     * @param Player $player
+     *
+     * @return void
      */
     abstract protected function internallyHandleSignInteraction(Player $player): void;
 
     /**
      * Create a new sign
      *
-     * @param  string[]  $signData
-     * @param  string  $text
-     * @param  string  $permission
+     * @param array $signData
+     * @param string $text
+     * @param string $permission
      *
      * @return bool
      */
     abstract public function createSign(array $signData, string $text, string $permission): bool;
 
     /**
-     * Send the creation form to the player
+     * Send the creation form to a player
      *
-     * @param  \pocketmine\player\Player  $player
-     * @param  string[]|null  $existingData
+     * @param Player $player
+     * @param string[]|null $existingData
+     *
+     * @return void
      */
     abstract public function sendCreateForm(Player $player, ?array $existingData = null): void;
 
@@ -135,7 +145,7 @@ abstract class MagicSign
     }
 
     /**
-     * @return \pocketmine\block\BaseSign
+     * @return BaseSign
      */
     public function getSignBlock(): BaseSign
     {
@@ -143,7 +153,7 @@ abstract class MagicSign
     }
 
     /**
-     * @return mixed[]|null
+     * @return array|null
      */
     public function getData(): ?array
     {

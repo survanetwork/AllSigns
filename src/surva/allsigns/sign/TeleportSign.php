@@ -25,10 +25,10 @@ class TeleportSign extends MagicSign
         }
 
         $permission = $this->data["settings"]["permission"];
-        $worldName  = $this->data["settings"]["world"];
-        $x          = $this->data["settings"]["xc"];
-        $y          = $this->data["settings"]["yc"];
-        $z          = $this->data["settings"]["zc"];
+        $worldName = $this->data["settings"]["world"];
+        $x = $this->data["settings"]["xc"];
+        $y = $this->data["settings"]["yc"];
+        $z = $this->data["settings"]["zc"];
 
         if ($permission !== "" && !$player->hasPermission($permission)) {
             $this->allSigns->sendMessage($player, "form.nousepermission");
@@ -65,19 +65,19 @@ class TeleportSign extends MagicSign
         }
 
         $this->data = [
-          "world"       => $wld->getFolderName(),
+          "world" => $wld->getFolderName(),
           "coordinates" => [
             "xc" => $this->signBlock->getPosition()->getX(),
             "yc" => $this->signBlock->getPosition()->getY(),
             "zc" => $this->signBlock->getPosition()->getZ(),
           ],
-          "type"        => SignType::TELEPORT_SIGN,
-          "settings"    => [
-            "world"      => $signData["world"],
-            "xc"         => $signData["xc"],
-            "yc"         => $signData["yc"],
-            "zc"         => $signData["zc"],
-            "text"       => $text,
+          "type" => SignType::TELEPORT_SIGN,
+          "settings" => [
+            "world" => $signData["world"],
+            "xc" => $signData["xc"],
+            "yc" => $signData["yc"],
+            "zc" => $signData["zc"],
+            "text" => $text,
             "permission" => $permission,
           ],
         ];

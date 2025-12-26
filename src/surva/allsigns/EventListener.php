@@ -1,7 +1,8 @@
 <?php
 
 /**
- * AllSigns | EventListener
+ * AllSigns | EventListener, listen for sign interaction or
+ * create/change events
  */
 
 namespace surva\allsigns;
@@ -26,9 +27,12 @@ class EventListener implements Listener
     }
 
     /**
-     * Monitor when signs are changing their content to create new magic signs
+     * Monitor when signs are changing their content to create new magic signs,
+     * prevent changing existing MagicSigns
      *
-     * @param  \pocketmine\event\block\SignChangeEvent  $ev
+     * @param SignChangeEvent $ev
+     *
+     * @return void
      */
     public function onSignChange(SignChangeEvent $ev): void
     {
@@ -56,9 +60,13 @@ class EventListener implements Listener
     }
 
     /**
-     * Check if a player interacts with a magic sign
+     * Check if a player interacts with a magic sign,
+     * run sign action if one exists or edit the sign if player is
+     * holding a golden pickaxe
      *
-     * @param  \pocketmine\event\player\PlayerInteractEvent  $ev
+     * @param PlayerInteractEvent $ev
+     *
+     * @return void
      */
     public function onPlayerInteract(PlayerInteractEvent $ev): void
     {
@@ -94,9 +102,12 @@ class EventListener implements Listener
     }
 
     /**
-     * Check if a player breaks a magic sign
+     * Check if a player breaks a magic sign and
+     * prevent if they don't have permission to do so
      *
-     * @param  \pocketmine\event\block\BlockBreakEvent  $ev
+     * @param BlockBreakEvent $ev
+     *
+     * @return void
      */
     public function onBlockBreak(BlockBreakEvent $ev): void
     {

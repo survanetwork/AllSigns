@@ -22,27 +22,18 @@ class SelectTypeForm implements Form
 
     private string $type = "custom_form";
     private string $title;
-
-    /**
-     * @var mixed[]
-     */
     private array $content;
 
-    /**
-     * @param  \surva\allsigns\AllSigns  $allSigns
-     * @param  \pocketmine\block\BaseSign  $signBlock
-     * @param  \surva\allsigns\util\Messages  $messages
-     */
     public function __construct(AllSigns $allSigns, BaseSign $signBlock, Messages $messages)
     {
-        $this->allSigns  = $allSigns;
+        $this->allSigns = $allSigns;
         $this->signBlock = $signBlock;
 
-        $this->title   = $messages->getMessage("form.typeselect.title");
+        $this->title = $messages->getMessage("form.typeselect.title");
         $this->content = [
           [
-            "type"    => "dropdown",
-            "text"    => $messages->getMessage("form.typeselect.select"),
+            "type" => "dropdown",
+            "text" => $messages->getMessage("form.typeselect.select"),
             "options" => [
               $messages->getMessage("signtypes.command"),
               $messages->getMessage("signtypes.teleport"),
@@ -53,10 +44,13 @@ class SelectTypeForm implements Form
     }
 
     /**
-     * Getting a response from the client form
+     * Handle response from client, check if valid
+     * and open chosen create sign form
      *
-     * @param  \pocketmine\player\Player  $player
-     * @param  mixed  $data
+     * @param Player $player
+     * @param $data
+     *
+     * @return void
      */
     public function handleResponse(Player $player, $data): void
     {

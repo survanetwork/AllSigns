@@ -27,8 +27,8 @@ class CommandSign extends MagicSign
         }
 
         $permission = $this->data["settings"]["permission"];
-        $command    = $this->data["settings"]["command"];
-        $context    = $this->data["settings"]["context"];
+        $command = $this->data["settings"]["command"];
+        $context = $this->data["settings"]["context"];
 
         if ($permission !== "" && !$player->hasPermission($permission)) {
             $this->allSigns->sendMessage($player, "form.nousepermission");
@@ -60,17 +60,17 @@ class CommandSign extends MagicSign
         }
 
         $this->data = [
-          "world"       => $wld->getFolderName(),
+          "world" => $wld->getFolderName(),
           "coordinates" => [
             "xc" => $this->signBlock->getPosition()->getX(),
             "yc" => $this->signBlock->getPosition()->getY(),
             "zc" => $this->signBlock->getPosition()->getZ(),
           ],
-          "type"        => SignType::COMMAND_SIGN,
-          "settings"    => [
-            "command"    => $signData["command"],
-            "context"    => $signData["context"],
-            "text"       => $text,
+          "type" => SignType::COMMAND_SIGN,
+          "settings" => [
+            "command" => $signData["command"],
+            "context" => $signData["context"],
+            "text" => $text,
             "permission" => $permission,
           ],
         ];
@@ -90,8 +90,8 @@ class CommandSign extends MagicSign
     /**
      * Replace variables in a command string
      *
-     * @param  string  $givenCommand
-     * @param  \pocketmine\player\Player  $player
+     * @param string $givenCommand
+     * @param Player $player
      *
      * @return string
      */

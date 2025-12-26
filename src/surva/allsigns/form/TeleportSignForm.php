@@ -14,24 +14,15 @@ use surva\allsigns\util\Messages;
 class TeleportSignForm implements Form
 {
     private TeleportSign $sign;
+    private Messages $messages;
 
     private string $type = "custom_form";
     private string $title;
-
-    /**
-     * @var mixed[]
-     */
     private array $content;
 
-    private Messages $messages;
-
-    /**
-     * @param  \surva\allsigns\sign\TeleportSign  $teleportSign
-     * @param  \surva\allsigns\util\Messages  $messages
-     */
     public function __construct(TeleportSign $teleportSign, Messages $messages)
     {
-        $this->sign     = $teleportSign;
+        $this->sign = $teleportSign;
         $this->messages = $messages;
 
         $existingData = $this->sign->getData();
@@ -39,46 +30,49 @@ class TeleportSignForm implements Form
         $wld = $this->sign->getSignBlock()->getPosition()->getWorld();
         $defaultWorld = $wld->getFolderName();
 
-        $this->title   = $messages->getMessage("form.teleportsign.title");
+        $this->title = $messages->getMessage("form.teleportsign.title");
         $this->content = [
           [
-            "type"    => "input",
-            "text"    => $messages->getMessage("form.teleportsign.world"),
+            "type" => "input",
+            "text" => $messages->getMessage("form.teleportsign.world"),
             "default" => $existingData !== null ? $existingData["settings"]["world"] : $defaultWorld,
           ],
           [
-            "type"    => "input",
-            "text"    => $messages->getMessage("form.teleportsign.xc"),
+            "type" => "input",
+            "text" => $messages->getMessage("form.teleportsign.xc"),
             "default" => $existingData !== null ? $existingData["settings"]["xc"] : "",
           ],
           [
-            "type"    => "input",
-            "text"    => $messages->getMessage("form.teleportsign.yc"),
+            "type" => "input",
+            "text" => $messages->getMessage("form.teleportsign.yc"),
             "default" => $existingData !== null ? $existingData["settings"]["yc"] : "",
           ],
           [
-            "type"    => "input",
-            "text"    => $messages->getMessage("form.teleportsign.zc"),
+            "type" => "input",
+            "text" => $messages->getMessage("form.teleportsign.zc"),
             "default" => $existingData !== null ? $existingData["settings"]["zc"] : "",
           ],
           [
-            "type"    => "input",
-            "text"    => $messages->getMessage("form.commandsign.text"),
+            "type" => "input",
+            "text" => $messages->getMessage("form.commandsign.text"),
             "default" => $existingData !== null ? $existingData["settings"]["text"] : "",
           ],
           [
-            "type"    => "input",
-            "text"    => $messages->getMessage("form.commandsign.permission"),
+            "type" => "input",
+            "text" => $messages->getMessage("form.commandsign.permission"),
             "default" => $existingData !== null ? $existingData["settings"]["permission"] : "",
           ],
         ];
     }
 
     /**
-     * Getting a response from the client form
+     * Handle form response from client, check if
+     * data is valid and create the sign
      *
-     * @param  \pocketmine\player\Player  $player
-     * @param  mixed  $data
+     * @param Player $player
+     * @param $data
+     *
+     * @return void
      */
     public function handleResponse(Player $player, $data): void
     {
@@ -97,7 +91,7 @@ class TeleportSignForm implements Form
           "zc"    => $data[3],
         ];
 
-        $text       = $data[4];
+        $text = $data[4];
         $permission = $data[5];
 
         if ($this->sign->createSign($signData, $text, $permission)) {

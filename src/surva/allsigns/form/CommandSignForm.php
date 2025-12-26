@@ -15,38 +15,29 @@ use surva\allsigns\util\Messages;
 class CommandSignForm implements Form
 {
     private CommandSign $sign;
+    private Messages $messages;
 
     private string $type = "custom_form";
     private string $title;
-
-    /**
-     * @var mixed[]
-     */
     private array $content;
 
-    private Messages $messages;
-
-    /**
-     * @param  \surva\allsigns\sign\CommandSign  $commandSign
-     * @param  \surva\allsigns\util\Messages  $messages
-     */
     public function __construct(CommandSign $commandSign, Messages $messages)
     {
-        $this->sign     = $commandSign;
+        $this->sign = $commandSign;
         $this->messages = $messages;
 
         $existingData = $this->sign->getData();
 
-        $this->title   = $messages->getMessage("form.commandsign.title");
+        $this->title = $messages->getMessage("form.commandsign.title");
         $this->content = [
           [
-            "type"    => "input",
-            "text"    => $messages->getMessage("form.commandsign.command"),
+            "type" => "input",
+            "text" => $messages->getMessage("form.commandsign.command"),
             "default" => $existingData !== null ? $existingData["settings"]["command"] : "",
           ],
           [
-            "type"    => "dropdown",
-            "text"    => $messages->getMessage("form.commandsign.context"),
+            "type" => "dropdown",
+            "text" => $messages->getMessage("form.commandsign.context"),
             "options" => [
               $messages->getMessage("form.commandsign.player"),
               $messages->getMessage("form.commandsign.server"),
@@ -55,23 +46,26 @@ class CommandSignForm implements Form
               : ExecutionContext::CONTEXT_PLAYER,
           ],
           [
-            "type"    => "input",
-            "text"    => $messages->getMessage("form.commandsign.text"),
+            "type" => "input",
+            "text" => $messages->getMessage("form.commandsign.text"),
             "default" => $existingData !== null ? $existingData["settings"]["text"] : "",
           ],
           [
-            "type"    => "input",
-            "text"    => $messages->getMessage("form.commandsign.permission"),
+            "type" => "input",
+            "text" => $messages->getMessage("form.commandsign.permission"),
             "default" => $existingData !== null ? $existingData["settings"]["permission"] : "",
           ],
         ];
     }
 
     /**
-     * Getting a response from the client form
+     * Handle form response from client, check if
+     * data is valid and create the sign
      *
-     * @param  \pocketmine\player\Player  $player
-     * @param  mixed  $data
+     * @param Player $player
+     * @param $data
+     *
+     * @return void
      */
     public function handleResponse(Player $player, $data): void
     {
@@ -88,7 +82,7 @@ class CommandSignForm implements Form
           "context" => $data[1],
         ];
 
-        $text       = $data[2];
+        $text = $data[2];
         $permission = $data[3];
 
         if ($this->sign->createSign($signData, $text, $permission)) {
