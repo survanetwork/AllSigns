@@ -40,8 +40,12 @@ class EventListener implements Listener
         $signBlock = $ev->getSign();
         $newText = $ev->getNewText();
 
-        $firstLine = strtolower($newText->getLine(0));
+        if ($this->allSigns->getMagicSignByBlock($signBlock) !== null) {
+            $ev->cancel();
+            return;
+        }
 
+        $firstLine = strtolower($newText->getLine(0));
         if (
             $firstLine === AllSignsGeneral::ID_SEPARATOR . "allsigns"
             || $firstLine === AllSignsGeneral::ID_SEPARATOR . "as"
@@ -50,7 +54,6 @@ class EventListener implements Listener
 
             if (!$pl->hasPermission("allsigns.create")) {
                 $pl->sendMessage($messages->getMessage("form.nopermission"));
-
                 return;
             }
 
@@ -82,20 +85,21 @@ class EventListener implements Listener
             return;
         }
 
+        $ev->cancel();
         $mode = $item->getTypeId() === VanillaItems::GOLDEN_PICKAXE()->getTypeId()
           ? AllSignsGeneral::EDIT_MODE
           : AllSignsGeneral::INTERACT_MODE;
 
-        if ($mode === AllSignsGeneral::EDIT_MODE) {
-            if (!$pl->hasPermission("allsigns.create")) {
-                $this->allSigns->sendMessage($pl, "form.nopermission");
-
+        if ($mode === AllSignsGeneral::INTERACT_MODE) {
+            if (!$pl->hasPermission("allsigns.use")) {
+                $this->allSigns->sendMessage($pl, "form.nousepermission");
                 return;
             }
-        } elseif (!$pl->hasPermission("allsigns.use")) {
-            $this->allSigns->sendMessage($pl, "form.nousepermission");
-
-            return;
+        } elseif ($mode === AllSignsGeneral::EDIT_MODE) {
+            if (!$pl->hasPermission("allsigns.create")) {
+                $this->allSigns->sendMessage($pl, "form.nopermission");
+                return;
+            }
         }
 
         $sign->handleSignInteraction($pl, $mode);
@@ -123,9 +127,8 @@ class EventListener implements Listener
         }
 
         if (!$pl->hasPermission("allsigns.create")) {
-            $this->allSigns->sendMessage($pl, "form.nopermission");
-
             $ev->cancel();
+            $this->allSigns->sendMessage($pl, "form.nopermission");
             return;
         }
 
