@@ -52,8 +52,7 @@ class AllSigns extends PluginBase
 
         $this->signs = [];
 
-        $this->saveResource(Path::join("languages", "en.yml"), true);
-        $this->defaultMessages = new Config(Path::join($this->getDataFolder(), "languages", "en.yml"));
+        $this->defaultMessages = new Config($this->getResourcePath(Path::join("languages", "en.yml")));
         $this->loadLanguageFiles();
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
@@ -228,9 +227,8 @@ class AllSigns extends PluginBase
 
             $langId = $fileNameRes[0];
 
-            $this->saveResource(Path::join("languages", $langId . ".yml"), true);
             $this->translationMessages[$langId] = new Config(
-                Path::join($this->getDataFolder(), "languages", $langId . ".yml")
+                $this->getResourcePath(Path::join("languages", $langId . ".yml"))
             );
         }
     }
