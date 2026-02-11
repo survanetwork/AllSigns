@@ -1,7 +1,7 @@
 {
     "name": "survanetwork/allsigns",
     "description": "Turn signs into World Teleport and Command Signs",
-    "version": "2.0.8",
+    "version": "2.0.9",
     "type": "project",
     "keywords": [
         "world",
